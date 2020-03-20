@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package pb;
+
+import "location.proto";
+import "pagination.proto";
+import "store.proto";
+
+message GetStoreRequest {
+    string id = 1;
+}
+
+message GetStoreResponse {
+    Store store = 1;
+}
+
+message GetStoresRequest {
+    Location location = 1;
+    string display_name = 2;
+    Pagination pagination = 3;
+}
+
+message GetStoresResponse {
+    repeated Store stores = 1;
+}
+
+service StoreService {
+    rpc GetStore (GetStoreRequest) returns (GetStoreResponse) {}
+    rpc GetStores (GetStoresRequest) returns (GetStoresResponse) {}
+}

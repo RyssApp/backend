@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package pb;
+
+message Location {
+    float latitude = 1;
+    float longitude = 2;
+}

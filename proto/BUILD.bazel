@@ -5,6 +5,10 @@ load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
 proto_library(
     name = "pb_proto",
     srcs = [
+        "location.proto",
+        "pagination.proto",
+        "store.proto",
+        "store_service.proto",
         "user.proto",
         "user_service.proto",
     ],
