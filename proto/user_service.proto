@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package pb;
+
+import "user.proto";
+
+message RegisterRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message RegisterResponse {
+  User user = 1;
+} 
+
+message LoginRequest {
+  // Either the username or the email. Need to be determined in the backend
+  string login = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  User user = 1;
+  string token = 2;
+  string refresh_token = 3;
+}
+
+message EmailResendRequest {
+  string email = 1;
+}
+
+message EmailResendResponse {}
+
+message PasswordResetRequest {
+  string login = 1;
+}
+
+message PasswordResetResponse {}
+
+message GetUserRequest {
+  string id = 1;
+  string email = 2;
+  string username = 3;
+}
+
+message GetUserResponse {
+  User user = 1;
+}
+
+service UserService {
+  rpc Register (RegisterRequest) returns (RegisterResponse) {}
+  rpc Login (LoginRequest) returns (LoginResponse) {}
+  rpc ResendEmail (EmailResendRequest) returns (EmailResendResponse) {}
+  rpc ResetPassword (PasswordResetRequest) returns (PasswordResetResponse) {}
+  rpc GetUser (GetUserRequest) returns (GetUserResponse) {}
+}

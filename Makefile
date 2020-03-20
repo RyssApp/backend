@@ -1,5 +1,5 @@
 go--genproto:
-	protoc --go_out=plugins=grpc:src/go/common/pb -I proto/ proto/votebot.proto
+	protoc --go_out=plugins=grpc:src/go/common/pb -I proto/ proto/*.proto
 
 go--deps:
 	go mod tidy
