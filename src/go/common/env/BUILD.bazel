@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["env.go"],
+    importpath = "github.com/ryssapp/backend/src/go/common/env",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_joho_godotenv//:go_default_library",
+        "@org_uber_go_zap//:go_default_library",
+    ],
+)

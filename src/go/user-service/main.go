@@ -5,21 +5,22 @@ import (
 	"fmt"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/google/uuid"
+	"github.com/ryssapp/backend/src/go/common/env"
+	"github.com/ryssapp/backend/src/go/common/log"
 	"github.com/ryssapp/backend/src/go/common/pb"
+	"github.com/ryssapp/backend/src/go/user-service/config"
+	"go.uber.org/zap"
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc"
-	"log"
 	"net"
 )
 
-// TODO: Increase this to 14 if run in production.
-const HashCost int = 4
-
 type userServiceServer struct {
+	hashCost int
 }
 
 func (s *userServiceServer) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.RegisterResponse, error) {
-	hash, err := bcrypt.GenerateFromPassword([]byte(req.GetPassword()), HashCost)
+	hash, err := bcrypt.GenerateFromPassword([]byte(req.GetPassword()), s.hashCost)
 	if err != nil {
 		return nil, err
 	}
@@ -54,11 +55,17 @@ func (s *userServiceServer) GetUser(ctx context.Context, reg *pb.GetUserRequest)
 }
 
 func main() {
-	lis, err := net.Listen("tcp", "localhost:8080")
+	log.Init()
+	env.Init()
+	c := config.Load()
+
+	lis, err := net.Listen("tcp", c.Address)
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		zap.L().Fatal("Failed to start tcp server.", zap.Error(err))
 	}
+	zap.L().Info("Serving grpc service.", zap.String("address", c.Address))
+
 	grpcServer := grpc.NewServer()
-	pb.RegisterUserServiceServer(grpcServer, &userServiceServer{})
+	pb.RegisterUserServiceServer(grpcServer, &userServiceServer{c.Cost})
 	grpcServer.Serve(lis)
 }
