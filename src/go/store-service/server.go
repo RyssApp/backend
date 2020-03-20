@@ -10,6 +10,12 @@ type storeServiceServer struct {
 	repo store.Repository
 }
 
+func NewServer(r store.Repository) *storeServiceServer {
+	return &storeServiceServer{
+		repo: r,
+	}
+}
+
 func (s storeServiceServer) GetStore(ctx context.Context, req *pb.GetStoreRequest) (*pb.GetStoreResponse, error) {
 	return s.repo.GetStore(ctx, req)
 }
