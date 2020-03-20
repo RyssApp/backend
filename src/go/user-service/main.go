@@ -7,13 +7,15 @@ import (
 	"github.com/google/uuid"
 	"github.com/ryssapp/backend/src/go/common/pb"
 	"golang.org/x/crypto/bcrypt"
+	"google.golang.org/grpc"
+	"log"
+	"net"
 )
 
 // TODO: Increase this to 14 if run in production.
 const HashCost int = 4
 
 type userServiceServer struct {
-	some string
 }
 
 func (s *userServiceServer) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.RegisterResponse, error) {
@@ -35,22 +37,28 @@ func (s *userServiceServer) Register(ctx context.Context, req *pb.RegisterReques
 	return &pb.RegisterResponse{User: user}, nil
 }
 
-func (s *userServiceServer) Login (ctx context.Context, reg *pb.LoginRequest) (*pb.LoginResponse, error) {
+func (s *userServiceServer) Login(ctx context.Context, reg *pb.LoginRequest) (*pb.LoginResponse, error) {
 	return nil, nil
 }
 
-func (s *userServiceServer) ResendEmail (ctx context.Context, reg *pb.EmailResendRequest) (*pb.EmailResendResponse, error) {
+func (s *userServiceServer) ResendEmail(ctx context.Context, reg *pb.EmailResendRequest) (*pb.EmailResendResponse, error) {
 	return nil, nil
 }
 
-func (s *userServiceServer) ResetPassword (ctx context.Context, reg *pb.PasswordResetRequest) (*pb.PasswordResetResponse, error) {
+func (s *userServiceServer) ResetPassword(ctx context.Context, reg *pb.PasswordResetRequest) (*pb.PasswordResetResponse, error) {
 	return nil, nil
 }
 
-func (s *userServiceServer) GetUser (ctx context.Context, reg *pb.GetUserRequest) (*pb.GetUserResponse, error) {
+func (s *userServiceServer) GetUser(ctx context.Context, reg *pb.GetUserRequest) (*pb.GetUserResponse, error) {
 	return nil, nil
 }
 
 func main() {
-
+	lis, err := net.Listen("tcp", "localhost:8080")
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
+	}
+	grpcServer := grpc.NewServer()
+	pb.RegisterUserServiceServer(grpcServer, &userServiceServer{})
+	grpcServer.Serve(lis)
 }
