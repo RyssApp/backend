@@ -5,6 +5,8 @@ go_library(
     srcs = [
         "location.pb.go",
         "pagination.pb.go",
+        "product.pb.go",
+        "product_service.pb.go",
         "store.pb.go",
         "store_service.pb.go",
         "user.pb.go",

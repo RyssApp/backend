@@ -7,6 +7,8 @@ proto_library(
     srcs = [
         "location.proto",
         "pagination.proto",
+        "product.proto",
+        "product_service.proto",
         "store.proto",
         "store_service.proto",
         "user.proto",

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+message Product {
+    string id = 1;
+    string display_name = 2;
+    string barcode = 3;
+    google.protobuf.Timestamp created_at = 5;
+}
+
