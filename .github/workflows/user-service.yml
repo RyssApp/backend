@@ -4,8 +4,8 @@ on:
   push:
     paths:
       - 'src/go/user-service/**'
-    #branches: 
-    #  - master
+    branches: 
+      - master
 
 jobs:
   build:
