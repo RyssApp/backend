@@ -25,3 +25,7 @@ func (r *redisRepository) SetToken(id string, token string) error {
 func (r *redisRepository) GetToken(id string) (string, error) {
 	return r.client.Get(id).Result()
 }
+
+func (r *redisRepository) DelToken(id string) error {
+	return r.client.Del(id).Err()
+}
