@@ -3,12 +3,14 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/go-pg/pg/v9"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/google/uuid"
 	"github.com/ryssapp/backend/src/go/common/env"
 	"github.com/ryssapp/backend/src/go/common/log"
 	"github.com/ryssapp/backend/src/go/common/pb"
 	"github.com/ryssapp/backend/src/go/user-service/config"
+	"github.com/ryssapp/backend/src/go/user-service/repository"
 	"go.uber.org/zap"
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc"
@@ -58,6 +60,12 @@ func main() {
 	log.Init()
 	env.Init()
 	c := config.Load()
+
+	db := pg.Connect(&pg.Options{
+		User: "postgres",
+	})
+	rep := repository.NewPostgresRepository(db)
+	zap.L().Info("Repository created", zap.Any("repository", rep))
 
 	lis, err := net.Listen("tcp", c.Address)
 	if err != nil {
