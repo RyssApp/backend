@@ -5,12 +5,16 @@ load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
 proto_library(
     name = "pb_proto",
     srcs = [
+<<<<<<< HEAD
         "location.proto",
         "pagination.proto",
         "product.proto",
         "product_service.proto",
         "store.proto",
         "store_service.proto",
+=======
+        "session_service.proto",
+>>>>>>> Add basic redis
         "user.proto",
         "user_service.proto",
     ],

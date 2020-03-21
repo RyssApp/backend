@@ -662,6 +662,7 @@ go_repository(
 )
 
 go_repository(
+<<<<<<< HEAD
     name = "com_github_joho_godotenv",
     importpath = "github.com/joho/godotenv",
     sum = "h1:Zjp+RcGpHhGlrMbJzXTrZZPrWj+1vfm90La1wgB6Bhc=",
@@ -827,4 +828,10 @@ go_repository(
     importpath = "github.com/graphql-go/handler",
     sum = "h1:CANh8WPnl5M9uA25c2GBhPqJhE53Fg0Iue/fRNla71E=",
     version = "v0.2.3",
+=======
+    name = "com_github_go_redis_redis_v7",
+    importpath = "github.com/go-redis/redis/v7",
+    sum = "h1:CrCexy/jYWZjW0AyVoHlcJUeZN19VWlbepTh1Vq6dJs=",
+    version = "v7.2.0",
+>>>>>>> Add basic redis
 )
