@@ -6,10 +6,10 @@ import (
 )
 
 type Config struct {
-	BindAddress           string `default:"localhost:3501" split_words:true`
+	BindAddress           string `default:"localhost:3501" split_words:"true"`
 	Cost                  int    `default:13`
-	PostgresConnection    string `required:"true" split_words:true`
-	SessionServiceAddress string `default:"localhost:3503" split_words:true`
+	PostgresConnection    string `required:"true" split_words:"true"`
+	SessionServiceAddress string `default:"localhost:3503" split_words:"true"`
 }
 
 func Load() *Config {
