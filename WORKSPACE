@@ -499,3 +499,10 @@ go_repository(
     sum = "h1:uRGJdciOHaEIrze2W8Q3AKkepLTh2hOroT7a+7czfdQ=",
     version = "v1.0.0-20141024135613-dd632973f1e7",
 )
+
+go_repository(
+    name = "com_github_go_redis_redis_v7",
+    importpath = "github.com/go-redis/redis/v7",
+    sum = "h1:CrCexy/jYWZjW0AyVoHlcJUeZN19VWlbepTh1Vq6dJs=",
+    version = "v7.2.0",
+)

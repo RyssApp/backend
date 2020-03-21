@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["service.go"],
+    importpath = "github.com/ryssapp/backend/src/go/session-service/service",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//src/go/user-service/config:go_default_library",
+        "@com_github_go_redis_redis_v7//:go_default_library",
+    ],
+)
