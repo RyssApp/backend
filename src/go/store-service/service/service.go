@@ -1,6 +1,9 @@
 package service
 
 import (
+	"fmt"
+	"net"
+
 	"github.com/go-pg/pg/v9"
 	"github.com/go-pg/pg/v9/orm"
 	"github.com/ryssapp/backend/src/go/common/pb"
@@ -11,7 +14,6 @@ import (
 	"github.com/ryssapp/backend/src/go/store-service/usecase"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
-	"net"
 )
 
 func Start() {
@@ -44,6 +46,7 @@ func initPostgres(addr string) *pg.DB {
 }
 
 func connectPostgres(addr string) *pg.DB {
+	fmt.Println(addr)
 	opts, err := pg.ParseURL(addr)
 	if err != nil {
 		zap.L().Fatal("Error while connecting to postgres.", zap.Error(err))
