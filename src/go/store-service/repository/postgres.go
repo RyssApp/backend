@@ -5,6 +5,8 @@ import (
 	"github.com/go-pg/pg/v9"
 	"github.com/ryssapp/backend/src/go/common/pb"
 	"github.com/ryssapp/backend/src/go/store-service/store"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 type postgresStoreRepository struct {
@@ -18,12 +20,15 @@ func NewPostgresRepository(db *pg.DB) store.Repository {
 }
 
 func (p postgresStoreRepository) GetStore(ctx context.Context, req *pb.GetStoreRequest) (*pb.GetStoreResponse, error) {
-	s := &pb.Store{Id: req.GetId()}
+	s := &store.Store{Id: req.GetId()}
 	err := p.db.Select(s)
 	if err != nil {
-		return nil, err
+		if err == pg.ErrNoRows {
+			return nil, status.Errorf(codes.NotFound, "Store with id `%s` does not exist.", req.GetId())
+		}
+		return nil, status.Error(codes.Internal, err.Error())
 	}
-	return &pb.GetStoreResponse{Store: s}, nil
+	return &pb.GetStoreResponse{Store: s.ToProto()}, nil
 }
 
 func (p postgresStoreRepository) GetStores(ctx context.Context, req *pb.GetStoresRequest) (*pb.GetStoresResponse, error) {

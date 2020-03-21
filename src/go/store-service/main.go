@@ -1,6 +1,9 @@
 package main
 
 import (
+	"github.com/go-pg/pg/v9/orm"
+	"github.com/ryssapp/backend/src/go/store-service/config"
+	"github.com/ryssapp/backend/src/go/store-service/store"
 	"log"
 	"net"
 
@@ -11,20 +14,28 @@ import (
 )
 
 func main() {
-	db := pg.Connect(&pg.Options{
-		User:     "ryss_dev",
-		Password: "lrnzt4z716lfwxa9",
-		Addr:     "db-postgresql-fra1-29218-do-user-7255094-0.a.db.ondigitalocean.com:25060",
-		Database: "development",
-	})
-	defer db.Close()
-
-	r := repository.NewPostgresRepository(db)
-
-	lis, err := net.Listen("tcp", ":6546")
+	cfg := config.Load()
+	opts, err := pg.ParseURL(cfg.PostgresConnection)
 	if err != nil {
 		log.Fatal(err)
 	}
+	db := pg.Connect(opts)
+	defer db.Close()
+	err = db.CreateTable(&store.Store{}, &orm.CreateTableOptions{
+		IfNotExists: true,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println("Connected to database")
+
+	r := repository.NewPostgresRepository(db)
+
+	lis, err := net.Listen("tcp", cfg.BindAddress)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println("Listening")
 	grpcServer := grpc.NewServer()
 	pb.RegisterStoreServiceServer(grpcServer, NewServer(r))
 	log.Fatal(grpcServer.Serve(lis))

@@ -373,3 +373,17 @@ go_repository(
     sum = "h1:5Beo0mZN8dRzgrMMkDp0jc8YXQKx9DiJ2k1dkvGsn5A=",
     version = "v0.0.0-20190524140312-2c0ae7006135",
 )
+
+go_repository(
+    name = "com_github_joho_godotenv",
+    importpath = "github.com/joho/godotenv",
+    sum = "h1:Zjp+RcGpHhGlrMbJzXTrZZPrWj+1vfm90La1wgB6Bhc=",
+    version = "v1.3.0",
+)
+
+go_repository(
+    name = "com_github_kelseyhightower_envconfig",
+    importpath = "github.com/kelseyhightower/envconfig",
+    sum = "h1:Im6hONhd3pLkfDFsbRgu68RDNkGF1r3dvMUtDTo2cv8=",
+    version = "v1.4.0",
+)
