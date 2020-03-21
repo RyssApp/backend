@@ -2,8 +2,14 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 go_library(
     name = "go_default_library",
-    srcs = ["types.go"],
+    srcs = [
+        "store.go",
+        "types.go",
+    ],
     importpath = "github.com/ryssapp/backend/src/go/common/types",
     visibility = ["//visibility:public"],
-    deps = ["//src/go/common/pb:go_default_library"],
+    deps = [
+        "//src/go/common/pb:go_default_library",
+        "@io_bazel_rules_go//proto/wkt:timestamp_go_proto",
+    ],
 )

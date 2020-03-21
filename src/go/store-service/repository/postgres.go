@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 	"github.com/go-pg/pg/v9"
-	"github.com/ryssapp/backend/src/go/store-service/store"
+	"github.com/ryssapp/backend/src/go/common/types"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -13,14 +13,14 @@ type postgresStoreRepository struct {
 	db *pg.DB
 }
 
-func NewPostgresRepository(db *pg.DB) store.Repository {
+func NewPostgresRepository(db *pg.DB) types.Repository {
 	return &postgresStoreRepository{
 		db: db,
 	}
 }
 
-func (p postgresStoreRepository) GetStore(ctx context.Context, req *store.GetStoreRequest) (*store.GetStoreResponse, error) {
-	s := &store.Store{Id: req.Id}
+func (p postgresStoreRepository) GetStore(ctx context.Context, req *types.GetStoreRequest) (*types.GetStoreResponse, error) {
+	s := &types.Store{Id: req.Id}
 	err := p.db.Select(s)
 	if err != nil {
 		if err == pg.ErrNoRows {
@@ -28,12 +28,12 @@ func (p postgresStoreRepository) GetStore(ctx context.Context, req *store.GetSto
 		}
 		return nil, status.Error(codes.Internal, err.Error())
 	}
-	return &store.GetStoreResponse{Store: s}, nil
+	return &types.GetStoreResponse{Store: s}, nil
 }
 
-func (p postgresStoreRepository) GetStores(ctx context.Context, req *store.GetStoresRequest) (*store.GetStoresResponse, error) {
+func (p postgresStoreRepository) GetStores(ctx context.Context, req *types.GetStoresRequest) (*types.GetStoresResponse, error) {
 	zap.L().Info("dasds", zap.Any("accc", req))
-	var stores []*store.Store
+	var stores []*types.Store
 	q := p.db.Model(&stores)
 	if req.Location != nil {
 		if req.Location.Latitude != 0 {
@@ -70,7 +70,7 @@ func (p postgresStoreRepository) GetStores(ctx context.Context, req *store.GetSt
 		}
 		return nil, status.Error(codes.Internal, err.Error())
 	}
-	return &store.GetStoresResponse{
+	return &types.GetStoresResponse{
 		Stores: stores,
 	}, nil
 }
