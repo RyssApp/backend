@@ -10,6 +10,7 @@ type Config struct {
 	RedisAddress  string
 	RedisPassword string `default:""`
 	RedisDatabase int    `default:0`
+	Secret        string
 }
 
 func Load() *Config {
