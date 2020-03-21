@@ -11,31 +11,58 @@ import (
 	"github.com/ryssapp/backend/src/go/common/pb"
 	"github.com/ryssapp/backend/src/go/user-service/config"
 	"github.com/ryssapp/backend/src/go/user-service/repository"
+	"github.com/ryssapp/backend/src/go/user-service/user"
 	"go.uber.org/zap"
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"net"
 )
 
 type userServiceServer struct {
-	hashCost int
+	hashCost   int
+	repository user.Repository
 }
 
 func (s *userServiceServer) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.RegisterResponse, error) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(req.GetPassword()), s.hashCost)
 	if err != nil {
-		return nil, err
+		zap.L().Error("Failed to hash password.", zap.Error(err))
+		return nil, status.Error(codes.Internal, "Internal server error occured")
 	}
 	fmt.Println("hash generated: ", hash)
 
-	// TODO: Check if name or email is already present
+	result, err := s.repository.GetUser(ctx, &pb.GetUserRequest{Username: req.GetUsername()})
+	if err != nil {
+		zap.L().Error("Failed to retrieve user from database.", zap.Error(err))
+		return nil, status.Error(codes.Internal, "Internal server error occured")
+	}
+
+	if result != nil {
+		return nil, status.Error(codes.InvalidArgument, "A user with this username already exists.")
+	}
+
+	result, err = s.repository.GetUser(ctx, &pb.GetUserRequest{Email: req.GetEmail()})
+	if result != nil {
+		return nil, status.Error(codes.InvalidArgument, "A user with this email already exists.")
+	}
+
+	if err != nil {
+		zap.L().Error("Failed to retrieve user from database.", zap.Error(err))
+		return nil, status.Error(codes.Internal, "Internal server error occured")
+	}
 
 	uuid := uuid.New().String()
 	user := &pb.User{Id: uuid, Email: req.GetEmail(), Username: req.GetUsername(), CreatedAt: ptypes.TimestampNow()}
 
 	fmt.Println("saving user: ", user.String())
 
-	// TODO: store in database
+	err = s.repository.StoreUser(ctx, user)
+	if err != nil {
+		zap.L().Error("Failed to store user in database.", zap.Error(err))
+		return nil, status.Error(codes.Internal, "Internal server error occured")
+	}
 
 	return &pb.RegisterResponse{User: user}, nil
 }
@@ -65,15 +92,14 @@ func main() {
 		User: "postgres",
 	})
 	rep := repository.NewPostgresRepository(db)
-	zap.L().Info("Repository created", zap.Any("repository", rep))
 
-	lis, err := net.Listen("tcp", c.Address)
+	lis, err := net.Listen("tcp", c.BindAddress)
 	if err != nil {
 		zap.L().Fatal("Failed to start tcp server.", zap.Error(err))
 	}
 	zap.L().Info("Serving grpc service.", zap.String("address", c.BindAddress))
 
 	grpcServer := grpc.NewServer()
-	pb.RegisterUserServiceServer(grpcServer, &userServiceServer{c.Cost})
+	pb.RegisterUserServiceServer(grpcServer, &userServiceServer{hashCost: c.Cost, repository: rep})
 	grpcServer.Serve(lis)
 }
