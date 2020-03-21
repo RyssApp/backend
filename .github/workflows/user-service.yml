@@ -37,6 +37,8 @@ jobs:
       run: make go--genproto
 
     - name: Build docker image
+      env:
+        DOCKER_PASS: ${{ secrets.HUB_PASSWORD }}
       run: |
         echo 'Logging in to Docker Hub'
         docker login -u theleede -p $DOCKER_PASS

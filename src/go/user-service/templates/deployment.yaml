@@ -9,7 +9,7 @@ metadata:
   annotations:
     keel.sh/pollSchedule: "@every 1m"
 spec:
-  replicas: 4
+  replicas: 3
   selector:
     matchLabels:
       app: ryss-backend
