@@ -93,6 +93,11 @@ func (s *userServiceServer) ResetPassword(ctx context.Context, reg *pb.PasswordR
 	return nil, nil
 }
 
-func (s *userServiceServer) GetUser(ctx context.Context, reg *pb.GetUserRequest) (*pb.GetUserResponse, error) {
-	return nil, nil
+func (s *userServiceServer) GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserResponse, error) {
+	user, err := s.u.GetUser(ctx, req)
+	if err != nil {
+		zap.L().Error("Failed to retrieve user from database.", zap.Error(err))
+		return nil, status.Error(codes.Internal, "Internal server error occured")
+	}
+	return &pb.GetUserResponse{User: user.UserToProto()}, nil
 }
