@@ -6,3 +6,6 @@ go--deps:
 	go mod vendor
 	bazel run //:gazelle -- update-repos -from_file=go.mod
 	bazel run //:gazelle
+
+user-service--push:
+	bazel run //:user-service -- --norun

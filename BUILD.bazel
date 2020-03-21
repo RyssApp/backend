@@ -1,6 +1,21 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
+load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+load("@io_bazel_rules_docker//docker:docker.bzl", "docker_push")
 
 gazelle(
     name = "gazelle",
     prefix = "github.com/ryssapp/backend",
 )
+
+go_image(
+    name = "user-service",
+    binary = "//src/go/user-service:user-service",
+)
+
+#docker_push(
+#    name = "user-service-push",
+#    image = ":user-service",
+#    repository = "ryss/user-service",
+#    stamp = True,
+#    tag = "latest",
+#)
