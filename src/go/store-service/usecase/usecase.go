@@ -3,15 +3,16 @@ package usecase
 import (
 	"context"
 	"github.com/ryssapp/backend/src/go/common/types"
+	"github.com/ryssapp/backend/src/go/store-service/store"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 type storeServiceUsecase struct {
-	repo types.Repository
+	repo store.Repository
 }
 
-func New(repo types.Repository) *storeServiceUsecase {
+func New(repo store.Repository) *storeServiceUsecase {
 	return &storeServiceUsecase{
 		repo: repo,
 	}

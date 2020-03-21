@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/go-pg/pg/v9"
 	"github.com/ryssapp/backend/src/go/common/types"
-	"go.uber.org/zap"
+	"github.com/ryssapp/backend/src/go/store-service/store"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -13,7 +13,7 @@ type postgresStoreRepository struct {
 	db *pg.DB
 }
 
-func NewPostgresRepository(db *pg.DB) types.Repository {
+func NewPostgresRepository(db *pg.DB) store.Repository {
 	return &postgresStoreRepository{
 		db: db,
 	}
@@ -32,7 +32,6 @@ func (p postgresStoreRepository) GetStore(ctx context.Context, req *types.GetSto
 }
 
 func (p postgresStoreRepository) GetStores(ctx context.Context, req *types.GetStoresRequest) (*types.GetStoresResponse, error) {
-	zap.L().Info("dasds", zap.Any("accc", req))
 	var stores []*types.Store
 	q := p.db.Model(&stores)
 	if req.Location != nil {

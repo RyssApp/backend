@@ -17,12 +17,12 @@ go_image(
 )
 
 container_push(
-   name = "store-service-push",
-   image = ":store-service",
-   format = "Docker",
-   registry = "docker.io",
-   repository = "ryss/store-service",
-   tag = "latest",
+    name = "store-service-push",
+    image = ":store-service",
+    format = "Docker",
+    registry = "docker.io",
+    repository = "ryss/store-service",
+    tag = "latest",
 )
 
 go_image(
@@ -31,10 +31,10 @@ go_image(
 )
 
 container_push(
-   name = "user-service-push",
-   image = ":user-service",
-   format = "Docker",
-   registry = "docker.io",
-   repository = "ryss/user-service",
-   tag = "latest",
+    name = "user-service-push",
+    image = ":user-service",
+    format = "Docker",
+    registry = "docker.io",
+    repository = "ryss/user-service",
+    tag = "latest",
 )

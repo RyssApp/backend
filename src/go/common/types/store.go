@@ -1,7 +1,6 @@
 package types
 
 import (
-	"context"
 	"github.com/golang/protobuf/ptypes/timestamp"
 	"github.com/ryssapp/backend/src/go/common/pb"
 )
@@ -104,14 +103,4 @@ func GetStoresResponseFromProto(r *pb.GetStoresResponse) *GetStoresResponse {
 	return &GetStoresResponse{
 		Stores: stores,
 	}
-}
-
-type Repository interface {
-	GetStore(ctx context.Context, req *GetStoreRequest) (*GetStoreResponse, error)
-	GetStores(ctx context.Context, req *GetStoresRequest) (*GetStoresResponse, error)
-}
-
-type Usecase interface {
-	GetStore(ctx context.Context, req *GetStoreRequest) (*GetStoreResponse, error)
-	GetStores(ctx context.Context, req *GetStoresRequest) (*GetStoresResponse, error)
 }

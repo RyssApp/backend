@@ -4,13 +4,14 @@ import (
 	"context"
 	"github.com/ryssapp/backend/src/go/common/pb"
 	"github.com/ryssapp/backend/src/go/common/types"
+	"github.com/ryssapp/backend/src/go/store-service/store"
 )
 
 type storeServiceServer struct {
-	use types.Usecase
+	use store.Usecase
 }
 
-func NewServer(u types.Usecase) *storeServiceServer {
+func NewServer(u store.Usecase) *storeServiceServer {
 	return &storeServiceServer{
 		use: u,
 	}

@@ -7,8 +7,8 @@ go_library(
     visibility = ["//visibility:public"],
     deps = [
         "//src/go/common/types:go_default_library",
+        "//src/go/store-service/store:go_default_library",
         "//vendor/github.com/go-pg/pg/v9:go_default_library",
-        "//vendor/go.uber.org/zap:go_default_library",
         "//vendor/google.golang.org/grpc/codes:go_default_library",
         "//vendor/google.golang.org/grpc/status:go_default_library",
     ],

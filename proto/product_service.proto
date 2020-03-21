@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package pb;
+
+import "pagination.proto";
+import "product.proto";
+
+message GetProductRequest {
+    string id = 1;
+    string barcode = 2;
+}
+
+message GetProductResponse {
+    Product product = 1;
+}
+
+message GetProductsRequest {
+    string display_name = 2;
+    Pagination pagination = 3;
+}
+
+message GetProductsResponse {
+    repeated Product products = 1;
+}
+
+service ProductService {
+    rpc GetProduct (GetProductRequest) returns (GetProductResponse) {}
+    rpc GetProducts (GetProductsRequest) returns (GetProductsResponse) {}
+}
