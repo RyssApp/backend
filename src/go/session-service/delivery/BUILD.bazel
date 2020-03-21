@@ -8,9 +8,9 @@ go_library(
     deps = [
         "//src/go/common/pb:go_default_library",
         "//src/go/session-service/session:go_default_library",
-        "@com_github_dgrijalva_jwt_go//:go_default_library",
-        "@org_golang_google_grpc//codes:go_default_library",
-        "@org_golang_google_grpc//status:go_default_library",
-        "@org_uber_go_zap//:go_default_library",
+        "//vendor/github.com/dgrijalva/jwt-go:go_default_library",
+        "//vendor/go.uber.org/zap:go_default_library",
+        "//vendor/google.golang.org/grpc/codes:go_default_library",
+        "//vendor/google.golang.org/grpc/status:go_default_library",
     ],
 )

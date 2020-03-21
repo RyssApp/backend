@@ -10,8 +10,8 @@ go_library(
         "//src/go/session-service/config:go_default_library",
         "//src/go/session-service/delivery:go_default_library",
         "//src/go/session-service/repository:go_default_library",
-        "@com_github_go_redis_redis_v7//:go_default_library",
+        "//vendor/github.com/go-redis/redis/v7:go_default_library",
+        "//vendor/go.uber.org/zap:go_default_library",
         "@org_golang_google_grpc//:go_default_library",
-        "@org_uber_go_zap//:go_default_library",
     ],
 )

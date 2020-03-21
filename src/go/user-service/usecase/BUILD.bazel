@@ -8,7 +8,7 @@ go_library(
     deps = [
         "//src/go/common/pb:go_default_library",
         "//src/go/user-service/user:go_default_library",
-        "@org_golang_google_grpc//codes:go_default_library",
-        "@org_golang_google_grpc//status:go_default_library",
+        "//vendor/google.golang.org/grpc/codes:go_default_library",
+        "//vendor/google.golang.org/grpc/status:go_default_library",
     ],
 )

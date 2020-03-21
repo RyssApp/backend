@@ -3,16 +3,13 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 go_library(
     name = "go_default_library",
     srcs = [
-<<<<<<< HEAD
         "location.pb.go",
         "pagination.pb.go",
         "product.pb.go",
         "product_service.pb.go",
+        "session_service.pb.go",
         "store.pb.go",
         "store_service.pb.go",
-=======
-        "session_service.pb.go",
->>>>>>> Add basic redis
         "user.pb.go",
         "user_service.pb.go",
     ],

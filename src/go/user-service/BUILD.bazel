@@ -8,31 +8,7 @@ go_library(
     deps = [
         "//src/go/common/env:go_default_library",
         "//src/go/common/log:go_default_library",
-<<<<<<< HEAD
-        "//src/go/common/pb:go_default_library",
-        "//src/go/user-service/config:go_default_library",
-        "//src/go/user-service/repository:go_default_library",
-<<<<<<< HEAD
-        "//vendor/github.com/go-pg/pg/v9:go_default_library",
-        "//vendor/github.com/google/uuid:go_default_library",
-        "//vendor/go.uber.org/zap:go_default_library",
-        "//vendor/golang.org/x/crypto/bcrypt:go_default_library",
-=======
-        "//src/go/user-service/user:go_default_library",
-        "@com_github_go_pg_pg_v9//:go_default_library",
->>>>>>> Check if name if in database and store user in database
-        "@com_github_golang_protobuf//ptypes:go_default_library_gen",
-        "@org_golang_google_grpc//:go_default_library",
-<<<<<<< HEAD
-=======
-        "@org_golang_google_grpc//codes:go_default_library",
-        "@org_golang_google_grpc//status:go_default_library",
-        "@org_golang_x_crypto//bcrypt:go_default_library",
-        "@org_uber_go_zap//:go_default_library",
->>>>>>> Check if name if in database and store user in database
-=======
         "//src/go/user-service/service:go_default_library",
->>>>>>> Refactor whole project with a very nice structure :)
     ],
 )
 

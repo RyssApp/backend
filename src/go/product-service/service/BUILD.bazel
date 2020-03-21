@@ -15,7 +15,6 @@ go_library(
         "//vendor/github.com/go-pg/pg/v9:go_default_library",
         "//vendor/github.com/go-pg/pg/v9/orm:go_default_library",
         "//vendor/go.uber.org/zap:go_default_library",
-        "@com_github_golang_protobuf//ptypes:go_default_library_gen",
         "@org_golang_google_grpc//:go_default_library",
     ],
 )
