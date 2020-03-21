@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-const ExpirationLength time.Duration = 24 * time.Hour
+const ExpirationLength time.Duration = time.Minute
 
 func Start() {
 	c := config.Load()
