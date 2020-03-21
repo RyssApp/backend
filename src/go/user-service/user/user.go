@@ -42,3 +42,8 @@ type Repository interface {
 	GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserResponse, error)
 	StoreUser(ctx context.Context, user *User) error
 }
+
+type Usecase interface {
+	GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserResponse, error)
+	StoreUser(ctx context.Context, user *User) error
+}
