@@ -7,5 +7,8 @@ go--deps:
 	bazel run //:gazelle -- update-repos -from_file=go.mod
 	bazel run //:gazelle
 
-user-service--push:
-	bazel run //:user-service -- --norun
+store-service--build:
+	bazel run //:store-service
+
+store-service--push:
+	bazel run //:store-service-push

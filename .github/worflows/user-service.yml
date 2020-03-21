@@ -38,16 +38,9 @@ jobs:
         "${GITHUB_WORKSPACE}/bin/bazel" build //src/go/user-service:user-service
 
     - name: Build docker image
-      env:
-        DOCKER_PASS: ${{ secrets.HUB_PASSWORD }}
-        IMAGE: ryss/backend
       run: |
         echo 'Logging in to Docker Hub'
         docker login -u theleede -p $DOCKER_PASS
-        echo 'Building Image'
-        docker build -t ${IMAGE} . -f Dockerfile
-        echo 'Tagging Image'
-        docker tag ${IMAGE} ${IMAGE}:latest
-        docker tag ${IMAGE} ${IMAGE}:${GITHUB_SHA::8}
-        echo 'Pushing Image'
-        docker push ${IMAGE}
+        echo 'Building Image and pushing it'
+        make store-service--build
+        make store-service--push
