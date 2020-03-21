@@ -8,6 +8,6 @@ go_library(
     deps = [
         "//src/go/common/pb:go_default_library",
         "//src/go/store-service/store:go_default_library",
-        "@com_github_go_pg_pg_v9//:go_default_library",
+        "//vendor/github.com/go-pg/pg/v9:go_default_library",
     ],
 )

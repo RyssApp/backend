@@ -3,5 +3,6 @@ go--genproto:
 
 go--deps:
 	go mod tidy
+	go mod vendor
 	bazel run //:gazelle -- update-repos -from_file=go.mod
 	bazel run //:gazelle
