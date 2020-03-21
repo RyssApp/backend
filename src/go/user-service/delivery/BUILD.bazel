@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["grpc.go"],
+    importpath = "github.com/ryssapp/backend/src/go/user-service/delivery",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//src/go/common/pb:go_default_library",
+        "//src/go/common/types:go_default_library",
+        "//vendor/github.com/go-pg/pg/v9:go_default_library",
+        "//vendor/github.com/google/uuid:go_default_library",
+        "//vendor/go.uber.org/zap:go_default_library",
+        "//vendor/golang.org/x/crypto/bcrypt:go_default_library",
+        "//vendor/google.golang.org/grpc/codes:go_default_library",
+        "//vendor/google.golang.org/grpc/status:go_default_library",
+        "@com_github_golang_protobuf//ptypes:go_default_library_gen",
+    ],
+)

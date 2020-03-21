@@ -15,7 +15,6 @@ message RegisterResponse {
 } 
 
 message LoginRequest {
-  // Either the username or the email. Need to be determined in the backend
   string login = 1;
   string password = 2;
 }
@@ -23,7 +22,6 @@ message LoginRequest {
 message LoginResponse {
   User user = 1;
   string token = 2;
-  string refresh_token = 3;
 }
 
 message EmailResendRequest {

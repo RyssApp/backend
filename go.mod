@@ -3,7 +3,9 @@ module github.com/ryssapp/backend
 go 1.14
 
 require (
-	github.com/go-pg/pg/v9 v9.1.3
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/go-pg/pg/v9 v9.1.4
+	github.com/go-redis/redis/v7 v7.2.0
 	github.com/gofiber/fiber v1.8.33
 	github.com/golang/protobuf v1.3.5
 	github.com/google/uuid v1.1.1
@@ -13,6 +15,6 @@ require (
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/valyala/fasthttp v1.9.0
 	go.uber.org/zap v1.14.1
-	golang.org/x/crypto v0.0.0-20200221231518-2aa609cf4a9d
+	golang.org/x/crypto v0.0.0-20200320181102-891825fb96df
 	google.golang.org/grpc v1.28.0
 )
