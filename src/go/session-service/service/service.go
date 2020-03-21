@@ -18,7 +18,7 @@ func Start() {
 	c := config.Load()
 	db := initRedis(c.RedisAddress, c.RedisPassword, c.RedisDatabase)
 	r := repository.New(db, ExpirationLength)
-	srv := delivery.NewServer(r)
+	srv := delivery.NewServer(r, c.Secret, ExpirationLength)
 
 	lis, err := net.Listen("tcp", c.BindAddress)
 	if err != nil {
