@@ -18,3 +18,15 @@ user-service--build:
 
 user-service--push:
 	bazel run //:user-service-push
+
+gateway-service--build:
+	bazel run //:gateway-service -- --norun
+
+gateway-service--push:
+	bazel run //:gateway-service-push
+
+product-service--build:
+	bazel run //:product-service -- --norun
+
+product-service--push:
+	bazel run //:product-service-push
