@@ -71,7 +71,7 @@ func main() {
 	if err != nil {
 		zap.L().Fatal("Failed to start tcp server.", zap.Error(err))
 	}
-	zap.L().Info("Serving grpc service.", zap.String("address", c.Address))
+	zap.L().Info("Serving grpc service.", zap.String("address", c.BindAddress))
 
 	grpcServer := grpc.NewServer()
 	pb.RegisterUserServiceServer(grpcServer, &userServiceServer{c.Cost})

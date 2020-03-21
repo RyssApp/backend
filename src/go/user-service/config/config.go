@@ -6,7 +6,7 @@ import (
 )
 
 type Config struct {
-	Address string `default:"localhost:3501"`
+	BindAddress string `default:"localhost:3501"`
 	Cost    int    `default:13`
 }
 
