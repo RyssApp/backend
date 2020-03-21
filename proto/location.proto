@@ -3,6 +3,9 @@ syntax = "proto3";
 package pb;
 
 message Location {
-    float latitude = 1;
-    float longitude = 2;
+    string address = 1;
+    string city = 2;
+    string zip_code = 3;
+    float latitude = 4;
+    float longitude = 5;
 }

@@ -1,0 +1,67 @@
+package service
+
+import (
+	"github.com/go-pg/pg/v9"
+	"github.com/go-pg/pg/v9/orm"
+	"github.com/ryssapp/backend/src/go/common/pb"
+	"github.com/ryssapp/backend/src/go/store-service/config"
+	"github.com/ryssapp/backend/src/go/store-service/delivery"
+	"github.com/ryssapp/backend/src/go/store-service/repository"
+	"github.com/ryssapp/backend/src/go/store-service/store"
+	"github.com/ryssapp/backend/src/go/store-service/usecase"
+	"go.uber.org/zap"
+	"google.golang.org/grpc"
+	"net"
+)
+
+func Start() {
+	cfg := config.Load()
+	db := initPostgres(cfg.PostgresConnection)
+	/*err := db.Insert(&store.Store{
+		Id: uuid.New().String(),
+		DisplayName: "Netto",
+		Location: &types.Location{
+			City: "Plauen",
+			ZipCode: "08529",
+			Address: "Anton-Kraus-Straße 8, 08529 Plauen-Wartberg",
+			Longitude: 50.4979596,
+			Latitude: 12.1608954,
+		},
+		CreatedAt:ptypes.TimestampNow(),
+	})
+	if err != nil {
+		zap.L().Fatal("Error", zap.Error(err))
+	}*/
+	r := repository.NewPostgresRepository(db)
+	u := usecase.New(r)
+	srv := delivery.NewServer(u)
+
+	lis, err := net.Listen("tcp", cfg.BindAddress)
+	if err != nil {
+		zap.L().Fatal("Error while listening.", zap.String("address", cfg.BindAddress), zap.Error(err))
+	}
+	zap.L().Info("Listening")
+	grpcServer := grpc.NewServer()
+	pb.RegisterStoreServiceServer(grpcServer, srv)
+	zap.L().Fatal("Error while serving.", zap.Error(grpcServer.Serve(lis)))
+}
+
+func initPostgres(addr string) *pg.DB {
+	db := connectPostgres(addr)
+	err := db.CreateTable(&store.Store{}, &orm.CreateTableOptions{
+		IfNotExists: true,
+	})
+	if err != nil {
+		zap.L().Error("Error while creating postgres scheme.", zap.Error(err))
+	}
+	zap.L().Info("Connected to database")
+	return db
+}
+
+func connectPostgres(addr string) *pg.DB {
+	opts, err := pg.ParseURL(addr)
+	if err != nil {
+		zap.L().Fatal("Error while connecting to postgres.", zap.Error(err))
+	}
+	return pg.Connect(opts)
+}
