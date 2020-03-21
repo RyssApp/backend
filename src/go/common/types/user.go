@@ -1,4 +1,4 @@
-package user
+package types
 
 import (
 	"context"
@@ -16,7 +16,7 @@ type User struct {
 	CreatedAt   *timestamp.Timestamp
 }
 
-func (u *User) ToProto() *pb.User {
+func (u *User) UserToProto() *pb.User {
 	return &pb.User{
 		Id:          u.Id,
 		Email:       u.Email,
@@ -38,12 +38,12 @@ func UserFromProto(u *pb.User) *User {
 	}
 }
 
-type Repository interface {
-	GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserResponse, error)
+type UserRepository interface {
+	GetUser(ctx context.Context, req *pb.GetUserRequest) (*User, error)
 	StoreUser(ctx context.Context, user *User) error
 }
 
-type Usecase interface {
-	GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserResponse, error)
+type UserUsecase interface {
+	GetUser(ctx context.Context, req *pb.GetUserRequest) (*User, error)
 	StoreUser(ctx context.Context, user *User) error
 }

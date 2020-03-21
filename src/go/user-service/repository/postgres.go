@@ -4,21 +4,21 @@ import (
 	"context"
 	"github.com/go-pg/pg/v9"
 	"github.com/ryssapp/backend/src/go/common/pb"
-	"github.com/ryssapp/backend/src/go/user-service/user"
+	"github.com/ryssapp/backend/src/go/common/types"
 )
 
 type postgresUserRepository struct {
 	db *pg.DB
 }
 
-func NewPostgresRepository(db *pg.DB) user.Repository {
+func NewPostgresRepository(db *pg.DB) types.UserRepository {
 	return &postgresUserRepository{
 		db: db,
 	}
 }
 
-func (p postgresUserRepository) GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserResponse, error) {
-	u := &pb.User{}
+func (p postgresUserRepository) GetUser(ctx context.Context, req *pb.GetUserRequest) (*types.User, error) {
+	u := &types.User{}
 	if req.GetId() != "" {
 		u.Id = req.GetId()
 	}
@@ -33,9 +33,9 @@ func (p postgresUserRepository) GetUser(ctx context.Context, req *pb.GetUserRequ
 	if err != nil {
 		return nil, err
 	}
-	return &pb.GetUserResponse{User: u}, nil
+	return u, nil
 }
 
-func (p postgresUserRepository) StoreUser(ctx context.Context, user *user.User) error {
+func (p postgresUserRepository) StoreUser(ctx context.Context, user *types.User) error {
 	return p.db.Insert(user)
 }

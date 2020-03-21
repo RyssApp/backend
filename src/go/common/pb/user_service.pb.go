@@ -119,7 +119,6 @@ func (m *RegisterResponse) GetUser() *User {
 }
 
 type LoginRequest struct {
-	// Either the username or the email. Need to be determined in the backend
 	Login                string   `protobuf:"bytes,1,opt,name=login,proto3" json:"login,omitempty"`
 	Password             string   `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`

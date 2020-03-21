@@ -4,11 +4,11 @@ import (
 	"github.com/go-pg/pg/v9"
 	"github.com/go-pg/pg/v9/orm"
 	"github.com/ryssapp/backend/src/go/common/pb"
+	"github.com/ryssapp/backend/src/go/common/types"
 	"github.com/ryssapp/backend/src/go/user-service/config"
 	"github.com/ryssapp/backend/src/go/user-service/delivery"
 	"github.com/ryssapp/backend/src/go/user-service/repository"
 	"github.com/ryssapp/backend/src/go/user-service/usecase"
-	"github.com/ryssapp/backend/src/go/user-service/user"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"net"
@@ -20,7 +20,15 @@ func Start() {
 	db := initPostgres(c.PostgresConnection)
 	r := repository.NewPostgresRepository(db)
 	u := usecase.New(r)
-	srv := delivery.NewServer(u, c.Cost)
+
+	conn, err := grpc.Dial(c.SessionServiceAddress, grpc.WithInsecure())
+	if err != nil {
+		zap.L().Fatal("Failed to connect to session service.", zap.Error(err))
+	}
+	defer conn.Close()
+	client := pb.NewSessionServiceClient(conn)
+
+	srv := delivery.NewServer(u, c.Cost, client)
 
 	lis, err := net.Listen("tcp", c.BindAddress)
 	if err != nil {
@@ -35,7 +43,7 @@ func Start() {
 
 func initPostgres(addr string) *pg.DB {
 	db := connectPostgres(addr)
-	err := db.CreateTable(&user.User{}, &orm.CreateTableOptions{
+	err := db.CreateTable(&types.User{}, &orm.CreateTableOptions{
 		IfNotExists: true,
 	})
 	if err != nil {

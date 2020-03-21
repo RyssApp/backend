@@ -6,6 +6,7 @@ go_library(
         "product.go",
         "store.go",
         "types.go",
+        "user.go",
     ],
     importpath = "github.com/ryssapp/backend/src/go/common/types",
     visibility = ["//visibility:public"],

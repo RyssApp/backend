@@ -7,7 +7,7 @@ go_library(
     visibility = ["//visibility:public"],
     deps = [
         "//src/go/common/pb:go_default_library",
-        "//src/go/user-service/user:go_default_library",
+        "//src/go/common/types:go_default_library",
         "//vendor/github.com/go-pg/pg/v9:go_default_library",
     ],
 )
