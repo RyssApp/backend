@@ -12,3 +12,9 @@ store-service--build:
 
 store-service--push:
 	bazel run //:store-service-push
+
+user-service--build:
+	bazel run //:user-service
+
+user-service--push:
+	bazel run //:user-service-push

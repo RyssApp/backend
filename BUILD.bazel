@@ -24,3 +24,17 @@ container_push(
    repository = "ryss/store-service",
    tag = "latest",
 )
+
+go_image(
+    name = "user-service",
+    binary = "//src/go/user-service:user-service",
+)
+
+container_push(
+   name = "user-service-push",
+   image = ":user-service",
+   format = "Docker",
+   registry = "docker.io",
+   repository = "ryss/user-service",
+   tag = "latest",
+)
