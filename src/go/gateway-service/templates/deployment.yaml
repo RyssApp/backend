@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: product-service-deployment
+  name: gateway-service-deployment
   labels:
     keel.sh/trigger: poll
     keel.sh/match-tag: "true"
@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: site
-        image: ryss/product-service:latest
+        image: ryss/gateway-service:latest
         imagePullPolicy: Always
         ports:
-          - containerPort: 3504
+          - containerPort: 3500

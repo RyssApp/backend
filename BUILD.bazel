@@ -38,3 +38,31 @@ container_push(
     repository = "ryss/user-service",
     tag = "latest",
 )
+
+go_image(
+    name = "gateway-service",
+    binary = "//src/go/gateway-service:gateway-service",
+)
+
+container_push(
+    name = "gateway-service-push",
+    image = ":gateway-service",
+    format = "Docker",
+    registry = "docker.io",
+    repository = "ryss/gateway-service",
+    tag = "latest",
+)
+
+go_image(
+    name = "product-service",
+    binary = "//src/go/product-service:product-service",
+)
+
+container_push(
+    name = "product-service-push",
+    image = ":product-service",
+    format = "Docker",
+    registry = "docker.io",
+    repository = "ryss/product-service",
+    tag = "latest",
+)
