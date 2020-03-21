@@ -6,10 +6,19 @@ go_library(
     importpath = "github.com/ryssapp/backend/src/go/user-service",
     visibility = ["//visibility:private"],
     deps = [
+        "//src/go/common/env:go_default_library",
+        "//src/go/common/log:go_default_library",
         "//src/go/common/pb:go_default_library",
+        "//src/go/user-service/config:go_default_library",
+        "//src/go/user-service/repository:go_default_library",
+        "@com_github_go_pg_pg_v9//:go_default_library",
         "//vendor/github.com/google/uuid:go_default_library",
         "//vendor/golang.org/x/crypto/bcrypt:go_default_library",
         "@com_github_golang_protobuf//ptypes:go_default_library_gen",
+        "@com_github_google_uuid//:go_default_library",
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_x_crypto//bcrypt:go_default_library",
+        "@org_uber_go_zap//:go_default_library",
     ],
 )
 
