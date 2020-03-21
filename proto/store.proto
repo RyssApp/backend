@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package pb;
+
+import "location.proto";
+import "google/protobuf/timestamp.proto";
+
+message Store {
+    string id = 1;
+    string display_name = 2;
+    string logo = 3;
+    Location location = 4;
+    google.protobuf.Timestamp created_at = 5;
+}
+
