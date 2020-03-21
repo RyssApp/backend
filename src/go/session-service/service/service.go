@@ -17,6 +17,8 @@ const ExpirationLength time.Duration = 24 * time.Hour
 func Start() {
 	c := config.Load()
 	db := initRedis(c.RedisAddress, c.RedisPassword, c.RedisDatabase)
+	defer db.Close()
+
 	r := repository.New(db, ExpirationLength)
 	srv := delivery.NewServer(r, c.Secret, ExpirationLength)
 
@@ -37,10 +39,10 @@ func initRedis(addr string, pw string, db int) *redis.Client {
 		Password: pw,
 		DB:       db,
 	})
-	_, err := c.Ping().Result()
+	val, err := c.Ping().Result()
 	if err != nil {
 		zap.L().Fatal("Failed to ping redis server.", zap.Error(err))
 	}
-	defer c.Close()
+	zap.L().Info("Received ping from redis", zap.String("ping", val))
 	return c
 }

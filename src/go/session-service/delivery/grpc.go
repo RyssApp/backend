@@ -38,6 +38,12 @@ func (s *SessionServiceServer) Create(ctx context.Context, req *pb.CreateSession
 		return nil, status.Error(codes.Internal, "Internal server error occured")
 	}
 
+	err = s.repo.SetToken(req.GetUserId(), ss)
+	if err != nil {
+		zap.L().Error("failed to set token", zap.Error(err))
+		return nil, status.Error(codes.Internal, "Internal server error occured")
+	}
+
 	return &pb.CreateSessionResponse{Token: ss}, nil
 }
 
@@ -81,6 +87,10 @@ func (s *SessionServiceServer) Delete(ctx context.Context, req *pb.DeleteSession
 		return nil, err.Err()
 	}
 
-	_ = s.repo.DelToken(req.GetUserId())
+	err2 := s.repo.DelToken(req.GetUserId())
+	if err2 != nil {
+		zap.L().Error("Failed to delete token", zap.Error(err2))
+		return nil, status.Error(codes.Internal, "Internal server error. Token was not deleted.")
+	}
 	return &pb.DeleteSessionResponse{}, nil
 }

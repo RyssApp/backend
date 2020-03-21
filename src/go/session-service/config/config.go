@@ -7,10 +7,10 @@ import (
 
 type Config struct {
 	BindAddress   string `default:"localhost:3503"`
-	RedisAddress  string
+	RedisAddress  string `default:"localhost:6379"`
 	RedisPassword string `default:""`
 	RedisDatabase int    `default:0`
-	Secret        string
+	Secret        string `required:"true"`
 }
 
 func Load() *Config {
