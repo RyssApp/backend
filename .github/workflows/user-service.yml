@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-go@v2-beta
-    - uses: actions/setup-protoc@master
+    - uses: Arduino/actions/setup-protoc@master
     
     - name: Mount bazel cache
       uses: actions/cache@v1
