@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "gql.go",
+        "gql_location.go",
+        "gql_store.go",
+        "http.go",
+    ],
+    importpath = "github.com/ryssapp/backend/src/go/gateway-service/delivery",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//src/go/common/pb:go_default_library",
+        "//src/go/common/types:go_default_library",
+        "//vendor/github.com/gofiber/fiber:go_default_library",
+        "//vendor/github.com/graphql-go/graphql:go_default_library",
+        "//vendor/github.com/graphql-go/handler:go_default_library",
+        "//vendor/github.com/valyala/fasthttp/fasthttpadaptor:go_default_library",
+        "//vendor/go.uber.org/zap:go_default_library",
+        "//vendor/google.golang.org/grpc/codes:go_default_library",
+        "//vendor/google.golang.org/grpc/status:go_default_library",
+    ],
+)

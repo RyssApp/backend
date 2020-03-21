@@ -1,18 +1,17 @@
-package store
+package types
 
 import (
 	"context"
 	"github.com/golang/protobuf/ptypes/timestamp"
 	"github.com/ryssapp/backend/src/go/common/pb"
-	"github.com/ryssapp/backend/src/go/common/types"
 )
 
 type Store struct {
-	Id          string
-	DisplayName string
-	Logo        string
-	CreatedAt   *timestamp.Timestamp
-	*types.Location
+	Id          string               `json:"id"`
+	DisplayName string               `json:"display_name"`
+	Logo        string               `json:"logo"`
+	CreatedAt   *timestamp.Timestamp `json:"created_at"`
+	*Location
 }
 
 func (s *Store) ToProto() *pb.Store {
@@ -30,13 +29,13 @@ func StoreFromProto(s *pb.Store) *Store {
 		Id:          s.GetId(),
 		DisplayName: s.GetDisplayName(),
 		Logo:        s.GetLogo(),
-		Location:    types.LocationFromProto(s.Location),
+		Location:    LocationFromProto(s.Location),
 		CreatedAt:   s.GetCreatedAt(),
 	}
 }
 
 type GetStoreRequest struct {
-	Id string
+	Id string `json:"id"`
 }
 
 func GetStoreRequestFromProto(r *pb.GetStoreRequest) *GetStoreRequest {
@@ -46,7 +45,7 @@ func GetStoreRequestFromProto(r *pb.GetStoreRequest) *GetStoreRequest {
 }
 
 type GetStoreResponse struct {
-	Store *Store
+	Store *Store `json:"store"`
 }
 
 func (r *GetStoreResponse) ToProto() *pb.GetStoreResponse {
@@ -62,9 +61,9 @@ func GetStoreResponseFromProto(r *pb.GetStoreResponse) *GetStoreResponse {
 }
 
 type GetStoresRequest struct {
-	Location    *types.Location
-	DisplayName string
-	Pagination  *types.Pagination
+	Location    *Location   `json:"location"`
+	DisplayName string      `json:"display_name"`
+	Pagination  *Pagination `json:"pagination"`
 }
 
 func (r *GetStoresRequest) ToProto() *pb.GetStoresRequest {
@@ -77,14 +76,14 @@ func (r *GetStoresRequest) ToProto() *pb.GetStoresRequest {
 
 func GetStoresRequestFromProto(r *pb.GetStoresRequest) *GetStoresRequest {
 	return &GetStoresRequest{
-		Location:    types.LocationFromProto(r.Location),
+		Location:    LocationFromProto(r.Location),
 		DisplayName: r.GetDisplayName(),
-		Pagination:  types.PaginationFromProto(r.Pagination),
+		Pagination:  PaginationFromProto(r.Pagination),
 	}
 }
 
 type GetStoresResponse struct {
-	Stores []*Store
+	Stores []*Store `json:"stores"`
 }
 
 func (r *GetStoresResponse) ToProto() *pb.GetStoresResponse {
@@ -94,6 +93,16 @@ func (r *GetStoresResponse) ToProto() *pb.GetStoresResponse {
 	}
 	return &pb.GetStoresResponse{
 		Stores: pbStores,
+	}
+}
+
+func GetStoresResponseFromProto(r *pb.GetStoresResponse) *GetStoresResponse {
+	stores := make([]*Store, len(r.Stores))
+	for i, st := range r.Stores {
+		stores[i] = StoreFromProto(st)
+	}
+	return &GetStoresResponse{
+		Stores: stores,
 	}
 }
 

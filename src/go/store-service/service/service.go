@@ -4,10 +4,10 @@ import (
 	"github.com/go-pg/pg/v9"
 	"github.com/go-pg/pg/v9/orm"
 	"github.com/ryssapp/backend/src/go/common/pb"
+	"github.com/ryssapp/backend/src/go/common/types"
 	"github.com/ryssapp/backend/src/go/store-service/config"
 	"github.com/ryssapp/backend/src/go/store-service/delivery"
 	"github.com/ryssapp/backend/src/go/store-service/repository"
-	"github.com/ryssapp/backend/src/go/store-service/store"
 	"github.com/ryssapp/backend/src/go/store-service/usecase"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
@@ -17,21 +17,6 @@ import (
 func Start() {
 	cfg := config.Load()
 	db := initPostgres(cfg.PostgresConnection)
-	/*err := db.Insert(&store.Store{
-		Id: uuid.New().String(),
-		DisplayName: "Netto",
-		Location: &types.Location{
-			City: "Plauen",
-			ZipCode: "08529",
-			Address: "Anton-Kraus-Straße 8, 08529 Plauen-Wartberg",
-			Longitude: 50.4979596,
-			Latitude: 12.1608954,
-		},
-		CreatedAt:ptypes.TimestampNow(),
-	})
-	if err != nil {
-		zap.L().Fatal("Error", zap.Error(err))
-	}*/
 	r := repository.NewPostgresRepository(db)
 	u := usecase.New(r)
 	srv := delivery.NewServer(u)
@@ -48,7 +33,7 @@ func Start() {
 
 func initPostgres(addr string) *pg.DB {
 	db := connectPostgres(addr)
-	err := db.CreateTable(&store.Store{}, &orm.CreateTableOptions{
+	err := db.CreateTable(&types.Store{}, &orm.CreateTableOptions{
 		IfNotExists: true,
 	})
 	if err != nil {

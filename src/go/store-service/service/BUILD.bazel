@@ -7,10 +7,10 @@ go_library(
     visibility = ["//visibility:public"],
     deps = [
         "//src/go/common/pb:go_default_library",
+        "//src/go/common/types:go_default_library",
         "//src/go/store-service/config:go_default_library",
         "//src/go/store-service/delivery:go_default_library",
         "//src/go/store-service/repository:go_default_library",
-        "//src/go/store-service/store:go_default_library",
         "//src/go/store-service/usecase:go_default_library",
         "//vendor/github.com/go-pg/pg/v9:go_default_library",
         "//vendor/github.com/go-pg/pg/v9/orm:go_default_library",

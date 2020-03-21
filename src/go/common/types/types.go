@@ -12,9 +12,9 @@ type Location struct {
 
 func (l *Location) ToProto() *pb.Location {
 	return &pb.Location{
-		Address: l.Address,
-		City: l.City,
-		ZipCode: l.ZipCode,
+		Address:   l.Address,
+		City:      l.City,
+		ZipCode:   l.ZipCode,
 		Latitude:  l.Latitude,
 		Longitude: l.Longitude,
 	}
@@ -22,9 +22,9 @@ func (l *Location) ToProto() *pb.Location {
 
 func LocationFromProto(l *pb.Location) *Location {
 	return &Location{
-		Address: l.GetAddress(),
-		City: l.GetCity(),
-		ZipCode: l.GetZipCode(),
+		Address:   l.GetAddress(),
+		City:      l.GetCity(),
+		ZipCode:   l.GetZipCode(),
 		Latitude:  l.GetLatitude(),
 		Longitude: l.GetLongitude(),
 	}

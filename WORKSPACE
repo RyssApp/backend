@@ -675,3 +675,157 @@ go_repository(
     sum = "h1:Im6hONhd3pLkfDFsbRgu68RDNkGF1r3dvMUtDTo2cv8=",
     version = "v1.4.0",
 )
+
+go_repository(
+    name = "com_github_aymerick_raymond",
+    importpath = "github.com/aymerick/raymond",
+    sum = "h1:VEp3GpgdAnv9B2GFyTvqgcKvY+mfKMjPOA3SbKLtnU0=",
+    version = "v2.0.2+incompatible",
+)
+
+go_repository(
+    name = "com_github_cbroglie_mustache",
+    importpath = "github.com/cbroglie/mustache",
+    sum = "h1:ivMg8MguXq/rrz2eu3tw6g3b16+PQhoTn6EZAhst2mw=",
+    version = "v1.0.1",
+)
+
+go_repository(
+    name = "com_github_eknkc_amber",
+    importpath = "github.com/eknkc/amber",
+    sum = "h1:clC1lXBpe2kTj2VHdaIu9ajZQe4kcEY9j0NsnDDBZ3o=",
+    version = "v0.0.0-20171010120322-cdade1c07385",
+)
+
+go_repository(
+    name = "com_github_fasthttp_websocket",
+    importpath = "github.com/fasthttp/websocket",
+    sum = "h1:AU/zSiIIAuJjBMf5o+vO0syGOnEfvZRu40xIhW/3RuM=",
+    version = "v1.4.2",
+)
+
+go_repository(
+    name = "com_github_gofiber_fiber",
+    importpath = "github.com/gofiber/fiber",
+    sum = "h1:oq4f0fhiKNrz1CAxsql3tpyIQ+1S+RekRoiczyYiUdI=",
+    version = "v1.8.33",
+)
+
+go_repository(
+    name = "com_github_gofiber_template",
+    importpath = "github.com/gofiber/template",
+    sum = "h1:Vf4Fby9zUWVQyY2y69KKyRHsEYlIE+Pxb25M+jiaEL0=",
+    version = "v1.0.0",
+)
+
+go_repository(
+    name = "com_github_google_gofuzz",
+    importpath = "github.com/google/gofuzz",
+    sum = "h1:A8PeW59pxE9IoFRqBp37U+mSNaQoZ46F1f0f863XSXw=",
+    version = "v1.0.0",
+)
+
+go_repository(
+    name = "com_github_gorilla_schema",
+    importpath = "github.com/gorilla/schema",
+    sum = "h1:CamqUDOFUBqzrvxuz2vEwo8+SUdwsluFh7IlzJh30LY=",
+    version = "v1.1.0",
+)
+
+go_repository(
+    name = "com_github_joker_hpp",
+    importpath = "github.com/Joker/hpp",
+    sum = "h1:PiDAizhfJbwZMISZ1Itx1ZTFeOFCml89Ofmz3V8rhoU=",
+    version = "v0.0.0-20180418125244-6893e659854a",
+)
+
+go_repository(
+    name = "com_github_joker_jade",
+    importpath = "github.com/Joker/jade",
+    sum = "h1:lOCEPvTAtWfLpSZYMOv/g44MGQFAolbKh2khHHGu0Kc=",
+    version = "v1.0.0",
+)
+
+go_repository(
+    name = "com_github_json_iterator_go",
+    importpath = "github.com/json-iterator/go",
+    sum = "h1:9yzud/Ht36ygwatGx56VwCZtlI/2AD15T1X2sjSuGns=",
+    version = "v1.1.9",
+)
+
+go_repository(
+    name = "com_github_klauspost_compress",
+    importpath = "github.com/klauspost/compress",
+    sum = "h1:Bx0qjetmNjdFXASH02NSAREKpiaDwkO1DRZ3dV2KCcs=",
+    version = "v1.8.2",
+)
+
+go_repository(
+    name = "com_github_klauspost_cpuid",
+    importpath = "github.com/klauspost/cpuid",
+    sum = "h1:vJi+O/nMdFt0vqm8NZBI6wzALWdA2X+egi0ogNyrC/w=",
+    version = "v1.2.1",
+)
+
+go_repository(
+    name = "com_github_modern_go_concurrent",
+    importpath = "github.com/modern-go/concurrent",
+    sum = "h1:ZqeYNhU3OHLH3mGKHDcjJRFFRrJa6eAM5H+CtDdOsPc=",
+    version = "v0.0.0-20180228061459-e0a39a4cb421",
+)
+
+go_repository(
+    name = "com_github_modern_go_reflect2",
+    importpath = "github.com/modern-go/reflect2",
+    sum = "h1:Esafd1046DLDQ0W1YjYsBW+p8U2u7vzgW2SQVmlNazg=",
+    version = "v0.0.0-20180701023420-4b7aa43c6742",
+)
+
+go_repository(
+    name = "com_github_savsgio_gotils",
+    importpath = "github.com/savsgio/gotils",
+    sum = "h1:PgA+Olipyj258EIEYnpFFONrrCcAIWNUNoFhUfMqAGY=",
+    version = "v0.0.0-20200117113501-90175b0fbe3f",
+)
+
+go_repository(
+    name = "com_github_valyala_bytebufferpool",
+    importpath = "github.com/valyala/bytebufferpool",
+    sum = "h1:GqA5TC/0021Y/b9FG4Oi9Mr3q7XYx6KllzawFIhcdPw=",
+    version = "v1.0.0",
+)
+
+go_repository(
+    name = "com_github_valyala_fasthttp",
+    importpath = "github.com/valyala/fasthttp",
+    sum = "h1:hNpmUdy/+ZXYpGy0OBfm7K0UQTzb73W0T0U4iJIVrMw=",
+    version = "v1.9.0",
+)
+
+go_repository(
+    name = "com_github_valyala_fasttemplate",
+    importpath = "github.com/valyala/fasttemplate",
+    sum = "h1:RZqt0yGBsps8NGvLSGW804QQqCUYYLsaOjTVHy1Ocw4=",
+    version = "v1.1.0",
+)
+
+go_repository(
+    name = "com_github_valyala_tcplisten",
+    importpath = "github.com/valyala/tcplisten",
+    sum = "h1:0R4NLDRDZX6JcmhJgXi5E4b8Wg84ihbmUKp/GvSPEzc=",
+    version = "v0.0.0-20161114210144-ceec8f93295a",
+)
+
+go_repository(
+    name = "com_github_graphql_go_graphql",
+    importpath = "github.com/graphql-go/graphql",
+    sum = "h1:5Va/Rt4l5g3YjwDnid3vFfn43faaQBq7rMcIZ0VnV34=",
+    version = "v0.7.9",
+)
+
+go_repository(
+    name = "com_github_graphql_go_handler",
+    importpath = "github.com/graphql-go/handler",
+    sum = "h1:CANh8WPnl5M9uA25c2GBhPqJhE53Fg0Iue/fRNla71E=",
+    version = "v0.2.3",
+)
