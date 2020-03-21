@@ -8,7 +8,7 @@ import (
 type Store struct {
 	Id          string               `json:"id"`
 	DisplayName string               `json:"display_name"`
-	Logo        string               `json:"logo"`
+	LogoUrl        string               `json:"logo_url"`
 	CreatedAt   *timestamp.Timestamp `json:"created_at"`
 	*Location
 }
@@ -17,7 +17,7 @@ func (s *Store) ToProto() *pb.Store {
 	return &pb.Store{
 		Id:          s.Id,
 		DisplayName: s.DisplayName,
-		Logo:        s.Logo,
+		LogoUrl:        s.LogoUrl,
 		Location:    s.Location.ToProto(),
 		CreatedAt:   s.CreatedAt,
 	}
@@ -27,7 +27,7 @@ func StoreFromProto(s *pb.Store) *Store {
 	return &Store{
 		Id:          s.GetId(),
 		DisplayName: s.GetDisplayName(),
-		Logo:        s.GetLogo(),
+		LogoUrl:        s.GetLogoUrl(),
 		Location:    LocationFromProto(s.Location),
 		CreatedAt:   s.GetCreatedAt(),
 	}
