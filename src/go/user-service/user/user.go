@@ -2,39 +2,39 @@ package user
 
 import (
 	"context"
-	"github.com/ryssapp/backend/src/go/common/pb"
 	"github.com/golang/protobuf/ptypes/timestamp"
+	"github.com/ryssapp/backend/src/go/common/pb"
 )
 
 type User struct {
-	Id string
-	Email string
-	Verified bool
-	Username string
+	Id          string
+	Email       string
+	Verified    bool
+	Username    string
 	DisplayName string
-	Password string
-	CreatedAt *timestamp.Timestamp
+	Password    string
+	CreatedAt   *timestamp.Timestamp
 }
 
 func (u *User) ToProto() *pb.User {
 	return &pb.User{
-		Id: u.Id,
-		Email: u.Email,
-		Verified: u.Verified,
-		Username: u.Username,
+		Id:          u.Id,
+		Email:       u.Email,
+		Verified:    u.Verified,
+		Username:    u.Username,
 		DisplayName: u.DisplayName,
-		CreatedAt: u.CreatedAt,
+		CreatedAt:   u.CreatedAt,
 	}
 }
 
 func UserFromProto(u *pb.User) *User {
 	return &User{
-		Id: u.Id,
-		Email: u.Email,
-		Verified: u.Verified,
-		Username: u.Username,
+		Id:          u.Id,
+		Email:       u.Email,
+		Verified:    u.Verified,
+		Username:    u.Username,
 		DisplayName: u.DisplayName,
-		CreatedAt: u.CreatedAt,
+		CreatedAt:   u.CreatedAt,
 	}
 }
 
