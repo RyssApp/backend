@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package pb;
+
+message CreateSessionRequest {
+  string user_id = 1;
+}
+
+message CreateSessionResponse {
+  string token = 1;
+}
+
+message VerifySessionRequest {
+  string token = 1;
+  string user_id = 2;
+}
+
+message VerifySessionResponse {}
+
+message DeleteSessionRequest {
+  string token = 1;
+  string user_id = 2;
+}
+
+message DeleteSessionResponse {}
+
+service SessionService {
+  rpc Create(CreateSessionRequest) returns (CreateSessionResponse) {}
+  rpc Verify(VerifySessionRequest) returns (VerifySessionResponse) {}
+  rpc Delete(DeleteSessionRequest) returns (DeleteSessionResponse) {}
+}
