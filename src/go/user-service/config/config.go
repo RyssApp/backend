@@ -6,8 +6,9 @@ import (
 )
 
 type Config struct {
-	BindAddress string `default:"localhost:3501"`
-	Cost    int    `default:13`
+	BindAddress        string `default:"localhost:3501"`
+	Cost               int   `default:13`
+	PostgresConnection string
 }
 
 func Load() *Config {
