@@ -9,7 +9,7 @@ func (s *httpServer) createQuery() *graphql.Object {
 		graphql.ObjectConfig{
 			Name: "Query",
 			Fields: graphql.Fields{
-				"store": s.storeQuery(),
+				"store":  s.storeQuery(),
 				"stores": s.storesQuery(),
 			},
 		},
