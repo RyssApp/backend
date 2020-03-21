@@ -89,10 +89,6 @@ func validateToken(req *pb.VerifySessionRequest, secret string) (*pb.VerifySessi
 		if ve.Errors&jwt.ValidationErrorMalformed != 0 {
 			return nil, status.New(codes.InvalidArgument, "Invalid token provided")
 		} else if ve.Errors&(jwt.ValidationErrorExpired|jwt.ValidationErrorNotValidYet) != 0 {
-			err := s.repo.DelToken(req.GetUserId())
-			if err != nil {
-				zap.L().Error("Failed to delete token", zap.Error(err))
-			}
 			return nil, status.New(codes.Unauthenticated, "Token is expired.")
 		} else {
 			zap.L().Warn("JWT token couldn't be parsed.", zap.Error(err))
