@@ -1,9 +1,9 @@
-name: User Service CI
+name: Product Service CI
 
 on: 
   push:
     paths:
-      - 'src/go/user-service/**'
+      - 'src/go/product-service/**'
     branches: 
       - master
 
@@ -43,5 +43,5 @@ jobs:
         echo 'Logging in to Docker Hub'
         docker login -u theleede -p $DOCKER_PASS
         echo 'Building Image and pushing it'
-        make user-service--build
-        make user-service--push
+        make product-service--build
+        make product-service--push
