@@ -26,6 +26,9 @@ spec:
       containers:
       - name: user-service-deployment
         image: ryss/user-service:latest
+        envFrom:
+        - configMapRef:
+          name: user-config
         imagePullPolicy: Always
         ports:
           - containerPort: 3501

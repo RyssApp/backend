@@ -26,6 +26,9 @@ spec:
       containers:
       - name: site
         image: ryss/store-service:latest
+        envFrom:
+        - configMapRef:
+          name: store-config
         imagePullPolicy: Always
         ports:
           - containerPort: 3502

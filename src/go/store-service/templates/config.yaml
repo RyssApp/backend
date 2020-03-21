@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: store-config
+data:
+  STORE_SERVICE_POSTGRESCONNECTION: ''
+  STORE_SERVICE_BIND_ADDRESS: '0.0.0.0:3502'
