@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"github.com/go-pg/pg/v9"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/google/uuid"
@@ -31,7 +30,6 @@ func (s *userServiceServer) Register(ctx context.Context, req *pb.RegisterReques
 		zap.L().Error("Failed to hash password.", zap.Error(err))
 		return nil, status.Error(codes.Internal, "Internal server error occured")
 	}
-	fmt.Println("hash generated: ", hash)
 
 	result, err := s.repository.GetUser(ctx, &pb.GetUserRequest{Username: req.GetUsername()})
 	if err != nil {
@@ -54,9 +52,7 @@ func (s *userServiceServer) Register(ctx context.Context, req *pb.RegisterReques
 	}
 
 	uuid := uuid.New().String()
-	user := &pb.User{Id: uuid, Email: req.GetEmail(), Username: req.GetUsername(), CreatedAt: ptypes.TimestampNow()}
-
-	fmt.Println("saving user: ", user.String())
+	user := &user.User{Id: uuid, Email: req.GetEmail(), Username: req.GetUsername(), CreatedAt: ptypes.TimestampNow(), Password: string(hash)}
 
 	err = s.repository.StoreUser(ctx, user)
 	if err != nil {
@@ -64,7 +60,7 @@ func (s *userServiceServer) Register(ctx context.Context, req *pb.RegisterReques
 		return nil, status.Error(codes.Internal, "Internal server error occured")
 	}
 
-	return &pb.RegisterResponse{User: user}, nil
+	return &pb.RegisterResponse{User: user.ToProto()}, nil
 }
 
 func (s *userServiceServer) Login(ctx context.Context, reg *pb.LoginRequest) (*pb.LoginResponse, error) {

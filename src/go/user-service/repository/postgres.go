@@ -36,6 +36,6 @@ func (p postgresUserRepository) GetUser(ctx context.Context, req *pb.GetUserRequ
 	return &pb.GetUserResponse{User: u}, nil
 }
 
-func (p postgresUserRepository) StoreUser(ctx context.Context, user *pb.User) error {
+func (p postgresUserRepository) StoreUser(ctx context.Context, user *user.User) error {
 	return p.db.Insert(user)
 }
