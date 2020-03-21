@@ -26,6 +26,9 @@ spec:
       containers:
       - name: site
         image: ryss/gateway-service:latest
+        envFrom:
+        - configMapRef:
+            name: gateway-config
         imagePullPolicy: Always
         ports:
           - containerPort: 3500

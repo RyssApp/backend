@@ -28,7 +28,7 @@ spec:
         image: ryss/user-service:latest
         envFrom:
         - configMapRef:
-          name: user-config
+            name: user-config
         imagePullPolicy: Always
         ports:
           - containerPort: 3501
