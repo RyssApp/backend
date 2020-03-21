@@ -2,12 +2,33 @@ package service
 
 import (
 	redis "github.com/go-redis/redis/v7"
-	"github.com/ryssapp/backend/src/go/user-service/config"
+	"github.com/ryssapp/backend/src/go/common/pb"
+	"github.com/ryssapp/backend/src/go/session-service/config"
+	"github.com/ryssapp/backend/src/go/session-service/delivery"
+	"github.com/ryssapp/backend/src/go/session-service/repository"
+	"go.uber.org/zap"
+	"google.golang.org/grpc"
+	"net"
+	"time"
 )
+
+const ExpirationLength time.Duration = 24 * time.Hour
 
 func Start() {
 	c := config.Load()
 	db := initRedis(c.RedisAddress, c.RedisPassword, c.RedisDatabase)
+	r := repository.New(db, ExpirationLength)
+	srv := delivery.NewServer(r)
+
+	lis, err := net.Listen("tcp", c.BindAddress)
+	if err != nil {
+		zap.L().Fatal("Failed to start tcp server.", zap.Error(err))
+	}
+	zap.L().Info("Serving grpc service.", zap.String("address", c.BindAddress))
+
+	grpcServer := grpc.NewServer()
+	pb.RegisterSessionServiceServer(grpcServer, srv)
+	zap.L().Fatal("Error while serving.", zap.Error(grpcServer.Serve(lis)))
 }
 
 func initRedis(addr string, pw string, db int) *redis.Client {
@@ -16,7 +37,7 @@ func initRedis(addr string, pw string, db int) *redis.Client {
 		Password: pw,
 		DB:       db,
 	})
-	_, err = c.Pong().Result()
+	_, err := c.Ping().Result()
 	if err != nil {
 		zap.L().Fatal("Failed to ping redis server.", zap.Error(err))
 	}

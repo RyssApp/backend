@@ -1,24 +1,24 @@
 package repository
 
 import (
-	"time"
-	"github.com/ryssapp/backend/src/go/session-service/session"
 	redis "github.com/go-redis/redis/v7"
+	"github.com/ryssapp/backend/src/go/session-service/session"
+	"time"
 )
 
 type redisRepository struct {
-	client redis.Client
+	client     *redis.Client
 	expiration time.Duration
 }
 
-func New(client *redis.Client, expiration time.Duration) *session.Repository {
-	&redisRepository{
-		client: client,
+func New(client *redis.Client, expiration time.Duration) session.Repository {
+	return &redisRepository{
+		client:     client,
 		expiration: expiration,
 	}
 }
 
-func (r *redisRepository) SetToken (id string, token string) error {
+func (r *redisRepository) SetToken(id string, token string) error {
 	return r.client.Set(id, token, r.expiration).Err()
 }
 

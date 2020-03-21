@@ -8,6 +8,7 @@ go_library(
     deps = [
         "//src/go/common/env:go_default_library",
         "//src/go/common/log:go_default_library",
+        "//src/go/session-service/service:go_default_library",
     ],
 )
 
