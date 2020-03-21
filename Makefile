@@ -8,13 +8,13 @@ go--deps:
 	bazel run //:gazelle
 
 store-service--build:
-	bazel run //:store-service
+	bazel run //:store-service -- --norun
 
 store-service--push:
 	bazel run //:store-service-push
 
 user-service--build:
-	bazel run //:user-service
+	bazel run //:user-service -- --norun
 
 user-service--push:
 	bazel run //:user-service-push

@@ -1,9 +1,9 @@
-name: User-Service CI
+name: Store Service CI
 
 on: 
   push:
     paths:
-      - 'src/go/user-service/**'
+      - 'src/go/store-service/**'
     #branches: 
     #  - master
 
@@ -43,5 +43,5 @@ jobs:
         echo 'Logging in to Docker Hub'
         docker login -u theleede -p $DOCKER_PASS
         echo 'Building Image and pushing it'
-        make user-service--build
-        make user-service--push
+        make store-service--build
+        make store-service--push
