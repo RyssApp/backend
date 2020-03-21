@@ -8,9 +8,9 @@ import (
 
 type User struct {
 	Id          string
-	Email       string
+	Email       string `pg:",unique"`
 	Verified    bool
-	Username    string
+	Username    string `pg:",unique"`
 	DisplayName string
 	Password    string
 	CreatedAt   *timestamp.Timestamp

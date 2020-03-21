@@ -47,7 +47,7 @@ func initPostgres(addr string) *pg.DB {
 		IfNotExists: true,
 	})
 	if err != nil {
-		zap.L().Error("Error while creating postgres scheme.", zap.Error(err))
+		zap.L().Fatal("Error while creating postgres scheme.", zap.Error(err))
 	}
 	zap.L().Info("Connected to database")
 	return db
@@ -56,7 +56,7 @@ func initPostgres(addr string) *pg.DB {
 func connectPostgres(addr string) *pg.DB {
 	opts, err := pg.ParseURL(addr)
 	if err != nil {
-		zap.L().Fatal("Error while connecting to postgres.", zap.Error(err))
+		zap.L().Fatal("Error while parsing the postgres connection.", zap.Error(err))
 	}
 	return pg.Connect(opts)
 }

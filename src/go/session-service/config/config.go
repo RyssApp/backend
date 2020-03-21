@@ -15,7 +15,7 @@ type Config struct {
 
 func Load() *Config {
 	var c Config
-	err := envconfig.Process("session_service", &c)
+	err := envconfig.Process("SESSION_SERVICE", &c)
 	if err != nil {
 		zap.L().Fatal("Failed to create config.", zap.Error(err))
 	}

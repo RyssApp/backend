@@ -2,6 +2,7 @@ package delivery
 
 import (
 	"context"
+	"github.com/go-pg/pg/v9"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/google/uuid"
 	"github.com/ryssapp/backend/src/go/common/pb"
@@ -34,7 +35,7 @@ func (s *userServiceServer) Register(ctx context.Context, req *pb.RegisterReques
 	}
 
 	result, err := s.u.GetUser(ctx, &pb.GetUserRequest{Username: req.GetUsername()})
-	if err != nil {
+	if err != nil && err != pg.ErrNoRows {
 		zap.L().Error("Failed to retrieve user from database.", zap.Error(err))
 		return nil, status.Error(codes.Internal, "Internal server error occured")
 	}
@@ -44,21 +45,21 @@ func (s *userServiceServer) Register(ctx context.Context, req *pb.RegisterReques
 	}
 
 	result, err = s.u.GetUser(ctx, &pb.GetUserRequest{Email: req.GetEmail()})
-	if result != nil {
-		return nil, status.Error(codes.InvalidArgument, "A user with this email already exists.")
-	}
-
-	if err != nil {
+	if err != nil && err != pg.ErrNoRows {
 		zap.L().Error("Failed to retrieve user from database.", zap.Error(err))
 		return nil, status.Error(codes.Internal, "Internal server error occured")
+	}
+
+	if result != nil {
+		return nil, status.Error(codes.InvalidArgument, "A user with this email already exists.")
 	}
 
 	uuid := uuid.New().String()
 	user := &types.User{Id: uuid, Email: req.GetEmail(), Username: req.GetUsername(), CreatedAt: ptypes.TimestampNow(), Password: string(hash)}
 
-	err = s.u.StoreUser(ctx, user)
-	if err != nil {
-		zap.L().Error("Failed to store user in database.", zap.Error(err))
+	err2 := s.u.StoreUser(ctx, user)
+	if err2 != nil {
+		zap.L().Error("Failed to store user in database.", zap.Error(err2))
 		return nil, status.Error(codes.Internal, "Internal server error occured")
 	}
 

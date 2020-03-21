@@ -17,23 +17,29 @@ func NewPostgresRepository(db *pg.DB) types.UserRepository {
 	}
 }
 
-func (p postgresUserRepository) GetUser(ctx context.Context, req *pb.GetUserRequest) (*types.User, error) {
-	u := &types.User{}
-	if req.GetId() != "" {
-		u.Id = req.GetId()
-	}
-	if req.GetEmail() != "" {
-		u.Email = req.GetEmail()
-	}
-	if req.GetUsername() != "" {
-		u.Username = req.GetUsername()
-	}
-
-	err := p.db.Select(u)
+func returnErrorOrValue(val *types.User, err error) (*types.User, error) {
 	if err != nil {
 		return nil, err
+	}	
+	return val, nil
+}
+
+func (p postgresUserRepository) GetUser(ctx context.Context, req *pb.GetUserRequest) (*types.User, error) {
+	if req.GetId() != "" {
+		u := &types.User{Id: req.GetId()}
+		err := p.db.Select(u)
+		return returnErrorOrValue(u, err)
+	} else if req.GetUsername() != "" {
+		u := &types.User{}
+		err := p.db.Model(u).Where("username = ?", req.GetUsername()).Select()
+		return returnErrorOrValue(u, err)
+	} else if req.GetEmail() != "" {
+		u := &types.User{}
+		err := p.db.Model(u).Where("email = ?", req.GetEmail()).Select()
+		return returnErrorOrValue(u, err)
+	} else {
+		return nil, nil
 	}
-	return u, nil
 }
 
 func (p postgresUserRepository) StoreUser(ctx context.Context, user *types.User) error {
