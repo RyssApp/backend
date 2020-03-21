@@ -6,10 +6,10 @@ import (
 )
 
 type Config struct {
-	BindAddress   string `default:"localhost:3503"`
-	RedisAddress  string `default:"localhost:6379"`
-	RedisPassword string `default:""`
-	RedisDatabase int    `default:0`
+	BindAddress   string `default:"localhost:3503" split_words:"true"`
+	RedisAddress  string `default:"localhost:6379" split_words:"true"`
+	RedisPassword string `default:"" split_words:"true"`
+	RedisDatabase int    `default:0 split_words:"true"`
 	Secret        string `required:"true"`
 }
 
