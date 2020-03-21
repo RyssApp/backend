@@ -24,7 +24,7 @@ spec:
         app: ryss-backend
     spec:
       containers:
-      - name: site
+      - name: user-service
         image: ryss/user-service:latest
         imagePullPolicy: Always
         ports:
