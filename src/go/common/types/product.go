@@ -43,7 +43,7 @@ func GetProductRequestFromProto(r *pb.GetProductRequest) *GetProductRequest {
 }
 
 type GetProductResponse struct {
-	Product *Product `json:"product"`
+	Product *Product `json:"store_product"`
 }
 
 func (r *GetProductResponse) ToProto() *pb.GetProductResponse {
@@ -54,7 +54,7 @@ func (r *GetProductResponse) ToProto() *pb.GetProductResponse {
 
 func GetProductResponseFromProto(r *pb.GetProductResponse) *GetProductResponse {
 	return &GetProductResponse{
-		Product: ProductFromProto(r.Product),
+		Product: ProductFromProto(r.GetProduct()),
 	}
 }
 

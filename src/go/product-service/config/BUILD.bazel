@@ -3,7 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 go_library(
     name = "go_default_library",
     srcs = ["config.go"],
-    importpath = "github.com/ryssapp/backend/src/go/product-service/config",
+    importpath = "github.com/ryssapp/backend/src/go/store_product-service/config",
     visibility = ["//visibility:public"],
     deps = [
         "//vendor/github.com/joho/godotenv:go_default_library",

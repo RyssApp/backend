@@ -3,7 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 go_library(
     name = "go_default_library",
     srcs = ["main.go"],
-    importpath = "github.com/ryssapp/backend/src/go/product-service",
+    importpath = "github.com/ryssapp/backend/src/go/store_product-service",
     visibility = ["//visibility:private"],
     deps = [
         "//src/go/common/env:go_default_library",
