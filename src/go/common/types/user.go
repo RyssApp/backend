@@ -17,6 +17,8 @@ type User struct {
 	CreatedAt   *timestamp.Timestamp
 }
 
+// Converts a ryss User into the protobuf message.
+// Password is not stored in the protobuf message.
 func (u *User) ToProto() *pb.User {
 	return &pb.User{
 		Id:          u.Id,
