@@ -1,6 +1,7 @@
 package delivery
 
 import (
+	"github.com/gofiber/cors"
 	"github.com/gofiber/fiber"
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
@@ -18,6 +19,7 @@ type httpServer struct {
 
 func NewHTTPServer(address string) *httpServer {
 	app := fiber.New()
+	app.Use(cors.New())
 	s := &httpServer{
 		address: address,
 		app:     app,

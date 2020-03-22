@@ -342,15 +342,15 @@ go_repository(
 go_repository(
     name = "com_github_klauspost_compress",
     importpath = "github.com/klauspost/compress",
-    sum = "h1:Bx0qjetmNjdFXASH02NSAREKpiaDwkO1DRZ3dV2KCcs=",
-    version = "v1.8.2",
+    sum = "h1:Znfn6hXZAHaLPNnlqUYRrBSReFHYybslgv4PTiyz6P0=",
+    version = "v1.10.2",
 )
 
 go_repository(
     name = "com_github_klauspost_cpuid",
     importpath = "github.com/klauspost/cpuid",
-    sum = "h1:vJi+O/nMdFt0vqm8NZBI6wzALWdA2X+egi0ogNyrC/w=",
-    version = "v1.2.1",
+    sum = "h1:CCtW0xUnWGVINKvE/WWOYKdsPV6mawAtvQuSl8guwQs=",
+    version = "v1.2.3",
 )
 
 go_repository(
@@ -377,15 +377,15 @@ go_repository(
 go_repository(
     name = "com_github_modern_go_concurrent",
     importpath = "github.com/modern-go/concurrent",
-    sum = "h1:ZqeYNhU3OHLH3mGKHDcjJRFFRrJa6eAM5H+CtDdOsPc=",
-    version = "v0.0.0-20180228061459-e0a39a4cb421",
+    sum = "h1:TRLaZ9cD/w8PVh93nsPXa1VrQ6jlwL5oN8l14QlcNfg=",
+    version = "v0.0.0-20180306012644-bacd9c7ef1dd",
 )
 
 go_repository(
     name = "com_github_modern_go_reflect2",
     importpath = "github.com/modern-go/reflect2",
-    sum = "h1:Esafd1046DLDQ0W1YjYsBW+p8U2u7vzgW2SQVmlNazg=",
-    version = "v0.0.0-20180701023420-4b7aa43c6742",
+    sum = "h1:9f412s+6RmYXLWZSEzVVgPGK7C2PphHj5RJrvfx9AWI=",
+    version = "v1.0.1",
 )
 
 go_repository(
@@ -680,4 +680,11 @@ go_repository(
     importpath = "go.uber.org/zap",
     sum = "h1:nYDKopTbvAPq/NrUVZwT15y2lpROBiLLyoRTbXOYWOo=",
     version = "v1.14.1",
+)
+
+go_repository(
+    name = "com_github_gofiber_cors",
+    importpath = "github.com/gofiber/cors",
+    sum = "h1://BnEJ01S8uQOzeFB9N4UNo3YMSKcuZ9p1mog6tLuvo=",
+    version = "v0.0.1",
 )
