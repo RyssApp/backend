@@ -32,11 +32,21 @@ func NewServer(u types.UserUsecase, hashCost int, s pb.SessionServiceClient) *us
 func (s *userServiceServer) Sanitize(ctx, req *pb.RegisterRequest) (*pb.RegisterResponse, error) {
 	re := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
 	if !re.MatchString(req.GetPassword()) {
-		return nil, status.Error(codes.InvalidArgument, "No valid E-Mail")
+		return nil, status.Error(codes.InvalidArgument, "Invalid E-Mail")
 	}
 
 	if len(req.GetPassword()) < 8 {
 		return nil, status.Error(codes.InvalidArgument, "Password too short")
+	}
+	if len(req.GetPassword()) > 1026 {
+		return nil, status.Error(codes.InvalidArgument, "Passwort too long")
+	}
+
+	if len(req.GetUsername()) < 3 {
+		return nil, status.Error(codes.InvalidArgument, "Username too short")
+	}
+	if len(req.GetUsername()) > 20 {
+		return nil, status.Error(codes.InvalidArgument, "Username too long")
 	}
 
 	return nil, nil
