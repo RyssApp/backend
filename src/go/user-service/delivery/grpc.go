@@ -38,7 +38,7 @@ func (s *userServiceServer) Sanitize(ctx, req *pb.RegisterRequest) error {
 	if len(req.GetPassword()) < 8 {
 		return status.Error(codes.InvalidArgument, "Password too short")
 	}
-	if len(req.GetPassword()) > 1026 {
+	if len(req.GetPassword()) > 256 {
 		return status.Error(codes.InvalidArgument, "Passwort too long")
 	}
 
