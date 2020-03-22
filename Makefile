@@ -30,3 +30,9 @@ product-service--build:
 
 product-service--push:
 	bazel run //:product-service-push
+
+session-service--build:
+	bazel run //:session-service -- --norun
+
+session-service--push:
+	bazel run //:session-service-push
