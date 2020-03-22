@@ -12,7 +12,7 @@ spec:
   replicas: 4
   selector:
     matchLabels:
-      app: ryss-backend
+      app: session-service
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -21,7 +21,7 @@ spec:
   template:
     metadata:
       labels:
-        app: ryss-backend
+        app: session-service
     spec:
       containers:
       - name: site
