@@ -1,0 +1,48 @@
+name: Store Product Service CI
+
+on: 
+  push:
+    paths:
+      - 'src/go/store-store_product-service/**'
+      - 'src/go/common/**'
+    branches: 
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-go@v2-beta
+    - uses: Arduino/actions/setup-protoc@master
+    - name: Install Protoc-gen-go
+      run: go get -u github.com/golang/protobuf/protoc-gen-go
+    
+    - name: Mount bazel cache
+      uses: actions/cache@v1
+      with:
+        path: "/home/runner/.cache/bazel"
+        key: bazel
+    - name: Install bazelisk
+      run: |
+        curl -LO "https://github.com/bazelbuild/bazelisk/releases/download/v1.3.0/bazelisk-linux-amd64"
+        mkdir -p "${GITHUB_WORKSPACE}/bin/"
+        mv bazelisk-linux-amd64 "${GITHUB_WORKSPACE}/bin/bazel"
+        chmod +x "${GITHUB_WORKSPACE}/bin/bazel"
+
+    - name: Install deps
+      run: make go--deps
+    - name: Build proto
+      run: make go--genproto
+
+    - name: Build docker image
+      env:
+        DOCKER_PASS: ${{ secrets.HUB_PASSWORD }}
+      run: |
+        echo 'Logging in to Docker Hub'
+        docker login -u theleede -p $DOCKER_PASS
+        echo 'Building Image and pushing it'
+        make store-product-service--docker-build
+        make store-product-service--docker-push

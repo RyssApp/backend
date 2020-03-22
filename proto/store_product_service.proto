@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package pb;
+
+import "pagination.proto";
+import "store_product.proto";
+
+message GetStoreProductRequest {
+    string id = 1;
+}
+
+message GetStoreProductResponse {
+    StoreProduct store_product = 1;
+}
+
+message GetStoreProductsRequest {
+    string store_id = 1;
+    string product_id = 2;
+    StoreProduct.Quantity quantity = 3;
+    Pagination pagination = 4;
+}
+
+message GetStoreProductsResponse {
+    repeated StoreProduct store_products = 1;
+}
+
+service StoreProductService {
+    rpc GetStoreProduct (GetStoreProductRequest) returns (GetStoreProductResponse) {}
+    rpc GetStoreProducts (GetStoreProductsRequest) returns (GetStoreProductsResponse) {}
+}

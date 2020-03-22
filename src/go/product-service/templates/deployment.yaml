@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service-deployment
+  labels:
+    keel.sh/trigger: poll
+    keel.sh/match-tag: "true"
+    keel.sh/policy: "force"
+  annotations:
+    keel.sh/pollSchedule: "@every 1m"
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: product-service
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: product-service
+    spec:
+      containers:
+      - name: site
+        image: ryss/product-service:latest
+        envFrom:
+        - configMapRef:
+            name: product-config
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 3504

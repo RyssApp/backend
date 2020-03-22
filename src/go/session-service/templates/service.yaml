@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: session-service-service
+spec:
+  ports:
+   - name: tcp
+     port: 80
+     protocol: TCP
+     targetPort: 3503
+  selector:
+    app: session-service
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.13

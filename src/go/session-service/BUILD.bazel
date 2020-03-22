@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["main.go"],
+    importpath = "github.com/ryssapp/backend/src/go/session-service",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//src/go/common/env:go_default_library",
+        "//src/go/common/log:go_default_library",
+        "//src/go/session-service/service:go_default_library",
+    ],
+)
+
+go_binary(
+    name = "session-service",
+    embed = [":go_default_library"],
+    visibility = ["//visibility:public"],
+)
