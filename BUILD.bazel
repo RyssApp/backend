@@ -80,3 +80,17 @@ container_push(
     repository = "ryss/session-service",
     tag = "latest",
 )
+
+go_image(
+    name = "store-product-service",
+    binary = "//src/go/store-product-service:store-product-service",
+)
+
+container_push(
+    name = "store-product-service-push",
+    image = ":store-product-service",
+    format = "Docker",
+    registry = "docker.io",
+    repository = "ryss/store-product-service",
+    tag = "latest",
+)
