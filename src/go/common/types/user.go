@@ -16,7 +16,7 @@ type User struct {
 	CreatedAt   *timestamp.Timestamp
 }
 
-func (u *User) UserToProto() *pb.User {
+func (u *User) ToProto() *pb.User {
 	return &pb.User{
 		Id:          u.Id,
 		Email:       u.Email,
@@ -35,6 +35,25 @@ func UserFromProto(u *pb.User) *User {
 		Username:    u.Username,
 		DisplayName: u.DisplayName,
 		CreatedAt:   u.CreatedAt,
+	}
+}
+
+type LoginResponse struct {
+	User  *User  `json:"user"`
+	Token string `json:"token"`
+}
+
+func (r *LoginResponse) LoginResponseToProto() *pb.LoginResponse {
+	return &pb.LoginResponse{
+		User:  r.User.ToProto(),
+		Token: r.Token,
+	}
+}
+
+func LoginResponseFromProto(r *pb.LoginResponse) *LoginResponse {
+	return &LoginResponse{
+		User:  UserFromProto(r.User),
+		Token: r.GetToken(),
 	}
 }
 

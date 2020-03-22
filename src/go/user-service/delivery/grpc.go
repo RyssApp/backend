@@ -60,13 +60,13 @@ func (s *userServiceServer) Register(ctx context.Context, req *pb.RegisterReques
 	hash, err := bcrypt.GenerateFromPassword([]byte(req.GetPassword()), s.hashCost)
 	if err != nil {
 		zap.L().Error("Failed to hash password.", zap.Error(err))
-		return nil, status.Error(codes.Internal, "Internal server error occured")
+		return nil, status.Error(codes.Internal, "Internal server error occurred")
 	}
 
 	result, err := s.u.GetUser(ctx, &pb.GetUserRequest{Username: req.GetUsername()})
 	if err != nil && err != pg.ErrNoRows {
 		zap.L().Error("Failed to retrieve user from database.", zap.Error(err))
-		return nil, status.Error(codes.Internal, "Internal server error occured")
+		return nil, status.Error(codes.Internal, "Internal server error occurred")
 	}
 
 	if result != nil {
@@ -76,7 +76,7 @@ func (s *userServiceServer) Register(ctx context.Context, req *pb.RegisterReques
 	result, err = s.u.GetUser(ctx, &pb.GetUserRequest{Email: req.GetEmail()})
 	if err != nil && err != pg.ErrNoRows {
 		zap.L().Error("Failed to retrieve user from database.", zap.Error(err))
-		return nil, status.Error(codes.Internal, "Internal server error occured")
+		return nil, status.Error(codes.Internal, "Internal server error occurred")
 	}
 
 	if result != nil {
@@ -89,18 +89,22 @@ func (s *userServiceServer) Register(ctx context.Context, req *pb.RegisterReques
 	err2 := s.u.StoreUser(ctx, user)
 	if err2 != nil {
 		zap.L().Error("Failed to store user in database.", zap.Error(err2))
-		return nil, status.Error(codes.Internal, "Internal server error occured")
+		return nil, status.Error(codes.Internal, "Internal server error occurred")
 	}
 
-	return &pb.RegisterResponse{User: user.UserToProto()}, nil
+	return &pb.RegisterResponse{User: user.ToProto()}, nil
 }
 
 func (s *userServiceServer) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginResponse, error) {
 	ur := &pb.GetUserRequest{Username: req.GetLogin()}
 	user, err := s.u.GetUser(ctx, ur)
+	if err == pg.ErrNoRows {
+		return nil, status.Error(codes.InvalidArgument, "User with the given username doesn't exists.")
+	}
+
 	if err != nil {
 		zap.L().Error("Failed to retrieve user from database.", zap.Error(err))
-		return nil, status.Error(codes.Internal, "Internal server error occured")
+		return nil, status.Error(codes.Internal, "Internal server error occurred")
 	}
 
 	valid := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(req.GetPassword()))
@@ -112,7 +116,7 @@ func (s *userServiceServer) Login(ctx context.Context, req *pb.LoginRequest) (*p
 	if err != nil {
 		return nil, err
 	}
-	return &pb.LoginResponse{User: user.UserToProto(), Token: session.GetToken()}, nil
+	return &pb.LoginResponse{User: user.ToProto(), Token: session.GetToken()}, nil
 }
 
 func (s *userServiceServer) ResendEmail(ctx context.Context, reg *pb.EmailResendRequest) (*pb.EmailResendResponse, error) {
@@ -127,7 +131,7 @@ func (s *userServiceServer) GetUser(ctx context.Context, req *pb.GetUserRequest)
 	user, err := s.u.GetUser(ctx, req)
 	if err != nil {
 		zap.L().Error("Failed to retrieve user from database.", zap.Error(err))
-		return nil, status.Error(codes.Internal, "Internal server error occured")
+		return nil, status.Error(codes.Internal, "Internal server error occurred")
 	}
-	return &pb.GetUserResponse{User: user.UserToProto()}, nil
+	return &pb.GetUserResponse{User: user.ToProto()}, nil
 }

@@ -9,6 +9,7 @@ import (
 type Config struct {
 	BindAddress         string `default:"localhost:3500" split_words:"true"`
 	StoreServiceAddress string `default:"localhost:3502" split_words:"true"`
+	UserServiceAddress  string `default:"localhost:3501" split_words:"true"`
 }
 
 func Load() *Config {

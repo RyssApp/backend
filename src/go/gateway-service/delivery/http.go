@@ -13,6 +13,7 @@ type httpServer struct {
 	address      string
 	app          *fiber.App
 	StoreService pb.StoreServiceClient
+	UserService  pb.UserServiceClient
 }
 
 func NewHTTPServer(address string) *httpServer {
@@ -26,7 +27,7 @@ func NewHTTPServer(address string) *httpServer {
 }
 
 func (s *httpServer) initRoutes() {
-	schemaConfig := graphql.SchemaConfig{Query: s.createQuery()}
+	schemaConfig := graphql.SchemaConfig{Query: s.createQuery(), Mutation: s.createMutation()}
 	schema, _ := graphql.NewSchema(schemaConfig)
 	h := fasthttpadaptor.NewFastHTTPHandler(handler.New(&handler.Config{
 		Schema: &schema,
