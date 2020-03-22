@@ -6,6 +6,7 @@ import (
 	"github.com/ryssapp/backend/src/go/common/pb"
 )
 
+// User represents a ryss user.
 type User struct {
 	Id          string
 	Email       string `pg:",unique"`
