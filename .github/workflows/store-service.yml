@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'src/go/store-service/**'
+      - 'src/go/common/**'
     branches: 
       - master
 

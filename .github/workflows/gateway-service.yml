@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'src/go/gateway-service/**'
+      - 'src/go/common/**'
     branches: 
       - master
 
