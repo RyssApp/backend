@@ -65,6 +65,20 @@ product-service--docker-build:
 product-service--docker-push:
 	make docker-push PROJECT=product-service
 
+# ============= Product service ============= #
+
+store-product-service--build:
+	make build PROJECT=store-product-service
+
+store-product-service--run:
+	make run PROJECT=store-product-service
+
+store-product-service--docker-build:
+	make docker-build PROJECT=store-product-service
+
+store-product-service--docker-push:
+	make docker-push PROJECT=store-product-service
+
 # ============= Sesssion service ============= #
 
 session-service--build:

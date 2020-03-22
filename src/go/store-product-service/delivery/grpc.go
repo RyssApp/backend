@@ -4,29 +4,29 @@ import (
 	"context"
 	"github.com/ryssapp/backend/src/go/common/pb"
 	"github.com/ryssapp/backend/src/go/common/types"
-	"github.com/ryssapp/backend/src/go/product-service/product"
+	"github.com/ryssapp/backend/src/go/store-product-service/store_product"
 )
 
-type productServiceServer struct {
-	use product.Usecase
+type storeProductServiceServer struct {
+	use store_product.Usecase
 }
 
-func NewServer(u product.Usecase) *productServiceServer {
-	return &productServiceServer{
+func NewServer(u store_product.Usecase) *storeProductServiceServer {
+	return &storeProductServiceServer{
 		use: u,
 	}
 }
 
-func (s *productServiceServer) GetProduct(ctx context.Context, req *pb.GetProductRequest) (*pb.GetProductResponse, error) {
-	res, err := s.use.GetProduct(ctx, types.GetProductRequestFromProto(req))
+func (s *storeProductServiceServer) GetStoreProduct(ctx context.Context, req *pb.GetStoreProductRequest) (*pb.GetStoreProductResponse, error) {
+	res, err := s.use.GetStoreProduct(ctx, types.GetStoreProductRequestFromProto(req))
 	if err != nil {
 		return nil, err
 	}
 	return res.ToProto(), nil
 }
 
-func (s *productServiceServer) GetProducts(ctx context.Context, req *pb.GetProductsRequest) (*pb.GetProductsResponse, error) {
-	res, err := s.use.GetProducts(ctx, types.GetProductsRequestFromProto(req))
+func (s *storeProductServiceServer) GetStoreProducts(ctx context.Context, req *pb.GetStoreProductsRequest) (*pb.GetStoreProductsResponse, error) {
+	res, err := s.use.GetStoreProducts(ctx, types.GetStoreProductsRequestFromProto(req))
 	if err != nil {
 		return nil, err
 	}

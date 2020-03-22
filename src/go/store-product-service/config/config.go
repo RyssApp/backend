@@ -7,7 +7,7 @@ import (
 )
 
 type Config struct {
-	BindAddress        string `default:"localhost:3504" split_words:"true"`
+	BindAddress        string `default:"localhost:3506" split_words:"true"`
 	PostgresConnection string `split_words:"true"`
 }
 

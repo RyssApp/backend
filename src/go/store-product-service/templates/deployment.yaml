@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: product-service-deployment
+  name: store-product-service-deployment
   labels:
     keel.sh/trigger: poll
     keel.sh/match-tag: "true"
@@ -12,7 +12,7 @@ spec:
   replicas: 4
   selector:
     matchLabels:
-      app: product-service
+      app: store-product-service
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -21,14 +21,14 @@ spec:
   template:
     metadata:
       labels:
-        app: product-service
+        app: store-product-service
     spec:
       containers:
       - name: site
-        image: ryss/product-service:latest
+        image: ryss/store-product-service:latest
         envFrom:
         - configMapRef:
-            name: product-config
+            name: store-product-config
         imagePullPolicy: Always
         ports:
-          - containerPort: 3504
+          - containerPort: 3506

@@ -3,7 +3,7 @@ syntax = "proto3";
 package pb;
 
 import "pagination.proto";
-import "store_product.proto";
+import "product.proto";
 
 message GetProductRequest {
     string id = 1;

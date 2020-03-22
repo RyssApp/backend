@@ -3,28 +3,28 @@ package usecase
 import (
 	"context"
 	"github.com/ryssapp/backend/src/go/common/types"
-	"github.com/ryssapp/backend/src/go/product-service/product"
+	"github.com/ryssapp/backend/src/go/store-product-service/store_product"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
-type productServiceUsecase struct {
-	repo product.Repository
+type storeProductServiceUsecase struct {
+	repo store_product.Repository
 }
 
-func New(repo product.Repository) *productServiceUsecase {
-	return &productServiceUsecase{
+func New(repo store_product.Repository) *storeProductServiceUsecase {
+	return &storeProductServiceUsecase{
 		repo: repo,
 	}
 }
 
-func (s *productServiceUsecase) GetProduct(ctx context.Context, req *types.GetProductRequest) (*types.GetProductResponse, error) {
-	if req.Id == "" && req.Barcode == "" {
-		return nil, status.Error(codes.InvalidArgument, "ID and barcode cannot be empty.")
+func (s *storeProductServiceUsecase) GetProduct(ctx context.Context, req *types.GetStoreProductRequest) (*types.GetStoreProductResponse, error) {
+	if req.Id == "" {
+		return nil, status.Error(codes.InvalidArgument, "ID cannot be empty.")
 	}
-	return s.repo.GetProduct(ctx, req)
+	return s.repo.GetStoreProduct(ctx, req)
 }
 
-func (s *productServiceUsecase) GetProducts(ctx context.Context, req *types.GetProductsRequest) (*types.GetProductsResponse, error) {
-	return s.repo.GetProducts(ctx, req)
+func (s *storeProductServiceUsecase) GetStoreProducts(ctx context.Context, req *types.GetStoreProductsRequest) (*types.GetStoreProductsResponse, error) {
+	return s.repo.GetStoreProducts(ctx, req)
 }

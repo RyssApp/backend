@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: product-service-service
+  name: store-product-service-service
 spec:
   ports:
    - name: tcp
@@ -11,4 +11,4 @@ spec:
   selector:
     app: product-service
   type: LoadBalancer
-  loadBalancerIP: 192.168.1.14
+  loadBalancerIP: 192.168.1.16

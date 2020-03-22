@@ -72,7 +72,7 @@ func (m *GetProductRequest) GetBarcode() string {
 }
 
 type GetProductResponse struct {
-	Product              *Product `protobuf:"bytes,1,opt,name=store_product,proto3" json:"store_product,omitempty"`
+	Product              *Product `protobuf:"bytes,1,opt,name=product,proto3" json:"product,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`

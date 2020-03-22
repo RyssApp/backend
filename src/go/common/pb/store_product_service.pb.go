@@ -155,7 +155,7 @@ func (m *GetStoreProductsRequest) GetQuantity() StoreProduct_Quantity {
 	if m != nil {
 		return m.Quantity
 	}
-	return StoreProduct_EMPTY
+	return StoreProduct_NONE
 }
 
 func (m *GetStoreProductsRequest) GetPagination() *Pagination {
