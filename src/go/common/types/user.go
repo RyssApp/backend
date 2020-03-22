@@ -30,6 +30,8 @@ func (u *User) ToProto() *pb.User {
 	}
 }
 
+// Converts a protobuf message, reprenting a
+// ryss user, to a User struct.
 func UserFromProto(u *pb.User) *User {
 	return &User{
 		Id:          u.Id,
