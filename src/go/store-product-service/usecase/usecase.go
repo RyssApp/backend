@@ -18,7 +18,7 @@ func New(repo store_product.Repository) *storeProductServiceUsecase {
 	}
 }
 
-func (s *storeProductServiceUsecase) GetProduct(ctx context.Context, req *types.GetStoreProductRequest) (*types.GetStoreProductResponse, error) {
+func (s *storeProductServiceUsecase) GetStoreProduct(ctx context.Context, req *types.GetStoreProductRequest) (*types.GetStoreProductResponse, error) {
 	if req.Id == "" {
 		return nil, status.Error(codes.InvalidArgument, "ID cannot be empty.")
 	}

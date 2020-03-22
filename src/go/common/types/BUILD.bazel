@@ -5,6 +5,7 @@ go_library(
     srcs = [
         "product.go",
         "store.go",
+        "store_product.go",
         "types.go",
         "user.go",
     ],

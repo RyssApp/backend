@@ -26,13 +26,13 @@ func Start() {
 	}
 	zap.L().Info("Listening")
 	grpcServer := grpc.NewServer()
-	pb.RegisterProductServiceServer(grpcServer, srv)
+	pb.RegisterStoreProductServiceServer(grpcServer, srv)
 	zap.L().Fatal("Error while serving.", zap.Error(grpcServer.Serve(lis)))
 }
 
 func initPostgres(addr string) *pg.DB {
 	db := connectPostgres(addr)
-	err := db.CreateTable(&types.Product{}, &orm.CreateTableOptions{
+	err := db.CreateTable(&types.StoreProduct{}, &orm.CreateTableOptions{
 		IfNotExists: true,
 	})
 	if err != nil {

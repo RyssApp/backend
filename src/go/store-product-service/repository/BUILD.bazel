@@ -3,11 +3,11 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 go_library(
     name = "go_default_library",
     srcs = ["postgres.go"],
-    importpath = "github.com/ryssapp/backend/src/go/product-service/repository",
+    importpath = "github.com/ryssapp/backend/src/go/store-product-service/repository",
     visibility = ["//visibility:public"],
     deps = [
         "//src/go/common/types:go_default_library",
-        "//src/go/product-service/product:go_default_library",
+        "//src/go/store-product-service/store_product:go_default_library",
         "//vendor/github.com/go-pg/pg/v9:go_default_library",
         "//vendor/google.golang.org/grpc/codes:go_default_library",
         "//vendor/google.golang.org/grpc/status:go_default_library",

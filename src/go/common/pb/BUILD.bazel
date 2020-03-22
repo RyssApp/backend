@@ -9,6 +9,8 @@ go_library(
         "product_service.pb.go",
         "session_service.pb.go",
         "store.pb.go",
+        "store_product.pb.go",
+        "store_product_service.pb.go",
         "store_service.pb.go",
         "user.pb.go",
         "user_service.pb.go",

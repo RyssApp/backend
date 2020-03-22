@@ -11,6 +11,8 @@ proto_library(
         "product_service.proto",
         "session_service.proto",
         "store.proto",
+        "store_product.proto",
+        "store_product_service.proto",
         "store_service.proto",
         "user.proto",
         "user_service.proto",
