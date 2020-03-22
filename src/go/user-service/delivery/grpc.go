@@ -53,7 +53,7 @@ func (s *userServiceServer) Sanitize(ctx, req *pb.RegisterRequest) error {
 }
 
 func (s *userServiceServer) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.RegisterResponse, error) {
-	if err := user.Sanitize(); err != nil {
+	if err := s.Sanitize(); err != nil {
 		return nil, err
 	}
 
