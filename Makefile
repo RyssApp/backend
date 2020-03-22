@@ -37,20 +37,6 @@ user-service--docker-build:
 user-service--docker-push:
 	make docker-push PROJECT=user-service
 
-# ============= Session service ============= #
-
-session-service--build:
-	make build PROJECT=session-service
-
-session-service--run:
-	make run PROJECT=session-service
-
-session-service--docker-build:
-	make docker-build PROJECT=session-service
-
-session-service--docker-push:
-	make docker-push PROJECT=session-service
-
 # ============= Gateway service ============= #
 
 gateway-service--build:
