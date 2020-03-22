@@ -3,4 +3,5 @@ kind: ConfigMap
 metadata:
   name: product-config
 data:
-  STORE_SERVICE_POSTGRES_CONNECTION: ''
+  PRODUCT_SERVICE_POSTGRES_CONNECTION: ''
+  PRODUCT_SERVICE_BIND_ADDRESS: '0.0.0.0:3504'

@@ -15,3 +15,15 @@ func (s *httpServer) createQuery() *graphql.Object {
 		},
 	)
 }
+
+func (s *httpServer) createMutation() *graphql.Object {
+	return graphql.NewObject(
+		graphql.ObjectConfig{
+			Name: "Mutation",
+			Fields: graphql.Fields{
+				"register": s.registerMutation(),
+				"login": s.loginMutation(),
+			},
+		},
+	)
+}

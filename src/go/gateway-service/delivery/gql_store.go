@@ -36,18 +36,15 @@ func (s *httpServer) storeQuery() *graphql.Field {
 		Type: storeType,
 		Args: graphql.FieldConfigArgument{
 			"id": &graphql.ArgumentConfig{
-				Type: graphql.String,
+				Type: graphql.NewNonNull(graphql.String),
 			},
 		},
 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-			if p.Args["id"] != nil {
-				res, err := s.StoreService.GetStore(p.Context, &pb.GetStoreRequest{Id: p.Args["id"].(string)})
-				if err != nil {
-					return nil, err
-				}
-				if res.GetStore() == nil {
-					return nil, nil
-				}
+			res, err := s.StoreService.GetStore(p.Context, &pb.GetStoreRequest{Id: p.Args["id"].(string)})
+			if err != nil {
+				return nil, err
+			}
+			if res.GetStore() != nil {
 				return types.StoreFromProto(res.GetStore()), nil
 			}
 			return nil, nil
