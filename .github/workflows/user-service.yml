@@ -43,5 +43,5 @@ jobs:
         echo 'Logging in to Docker Hub'
         docker login -u theleede -p $DOCKER_PASS
         echo 'Building Image and pushing it'
-        make user-service--build
-        make user-service--push
+        make user-service--docker-build
+        make user-service--docker-push
