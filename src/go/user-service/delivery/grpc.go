@@ -29,32 +29,32 @@ func NewServer(u types.UserUsecase, hashCost int, s pb.SessionServiceClient) *us
 	}
 }
 
-func (s *userServiceServer) Sanitize(ctx, req *pb.RegisterRequest) (*pb.RegisterResponse, error) {
+func (s *userServiceServer) Sanitize(ctx, req *pb.RegisterRequest) error {
 	re := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
 	if !re.MatchString(req.GetPassword()) {
-		return nil, status.Error(codes.InvalidArgument, "Invalid E-Mail")
+		return status.Error(codes.InvalidArgument, "Invalid E-Mail")
 	}
 
 	if len(req.GetPassword()) < 8 {
-		return nil, status.Error(codes.InvalidArgument, "Password too short")
+		return status.Error(codes.InvalidArgument, "Password too short")
 	}
 	if len(req.GetPassword()) > 1026 {
-		return nil, status.Error(codes.InvalidArgument, "Passwort too long")
+		return status.Error(codes.InvalidArgument, "Passwort too long")
 	}
 
 	if len(req.GetUsername()) < 3 {
-		return nil, status.Error(codes.InvalidArgument, "Username too short")
+		return status.Error(codes.InvalidArgument, "Username too short")
 	}
 	if len(req.GetUsername()) > 20 {
-		return nil, status.Error(codes.InvalidArgument, "Username too long")
+		return status.Error(codes.InvalidArgument, "Username too long")
 	}
 
-	return nil, nil
+	return nil
 }
 
 func (s *userServiceServer) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.RegisterResponse, error) {
-	if res, err := user.Sanitize(); err != nil {
-		return res, err
+	if err := user.Sanitize(); err != nil {
+		return nil, err
 	}
 
 	hash, err := bcrypt.GenerateFromPassword([]byte(req.GetPassword()), s.hashCost)
