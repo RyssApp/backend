@@ -7,7 +7,7 @@ spec:
    - name: tcp
      port: 80
      protocol: TCP
-     targetPort: 3504
+     targetPort: 3506
   selector:
     app: product-service
   type: LoadBalancer
