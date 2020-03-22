@@ -63,7 +63,7 @@ container_push(
     image = ":product-service",
     format = "Docker",
     registry = "docker.io",
-    repository = "ryss/product-service",
+    repository = "ryss/store_product-service",
     tag = "latest",
 )
 

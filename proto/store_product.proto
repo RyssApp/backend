@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+message StoreProduct {
+    string id = 1;
+    string store_id = 2;
+    string product_id = 3;
+    Quantity quantity = 4;
+    google.protobuf.Timestamp created_at = 5;
+
+    enum Quantity {
+        EMPTY = 0;
+        LOW = 1;
+        HIGH = 2;
+    }
+}
+

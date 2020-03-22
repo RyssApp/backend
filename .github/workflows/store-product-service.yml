@@ -1,9 +1,9 @@
-name: Product Service CI
+name: Gateway Service CI
 
 on: 
   push:
     paths:
-      - 'src/go/store_product-service/**'
+      - 'src/go/store-store_product-service/**'
       - 'src/go/common/**'
     branches: 
       - master
@@ -44,5 +44,5 @@ jobs:
         echo 'Logging in to Docker Hub'
         docker login -u theleede -p $DOCKER_PASS
         echo 'Building Image and pushing it'
-        make product-service--docker-build
-        make product-service--docker-push
+        make store-product-service--docker-build
+        make store-product-service--docker-push
