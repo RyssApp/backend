@@ -14,6 +14,7 @@ go_library(
     deps = [
         "//src/go/common/pb:go_default_library",
         "//src/go/common/types:go_default_library",
+        "//vendor/github.com/gofiber/cors:go_default_library",
         "//vendor/github.com/gofiber/fiber:go_default_library",
         "//vendor/github.com/graphql-go/graphql:go_default_library",
         "//vendor/github.com/graphql-go/handler:go_default_library",
