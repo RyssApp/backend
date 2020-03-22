@@ -6,6 +6,7 @@ go_library(
         "gql.go",
         "gql_location.go",
         "gql_store.go",
+        "gql_user.go",
         "http.go",
     ],
     importpath = "github.com/ryssapp/backend/src/go/gateway-service/delivery",
