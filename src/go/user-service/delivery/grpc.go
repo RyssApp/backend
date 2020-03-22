@@ -29,7 +29,7 @@ func NewServer(u types.UserUsecase, hashCost int, s pb.SessionServiceClient) *us
 	}
 }
 
-func (s *userServiceServer) Sanitize(ctx, req *pb.RegisterRequest) error {
+func (s *userServiceServer) Sanitize(ctx context.Context, req *pb.RegisterRequest) error {
 	re := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
 	if !re.MatchString(req.GetEmail()) {
 		return status.Error(codes.InvalidArgument, "Invalid E-Mail")
@@ -53,7 +53,7 @@ func (s *userServiceServer) Sanitize(ctx, req *pb.RegisterRequest) error {
 }
 
 func (s *userServiceServer) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.RegisterResponse, error) {
-	if err := s.Sanitize(); err != nil {
+	if err := s.Sanitize(ctx, req); err != nil {
 		return nil, err
 	}
 
