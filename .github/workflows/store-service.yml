@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'src/go/store-service/**'
+      - 'src/go/common/**'
     branches: 
       - master
 
@@ -43,5 +44,5 @@ jobs:
         echo 'Logging in to Docker Hub'
         docker login -u theleede -p $DOCKER_PASS
         echo 'Building Image and pushing it'
-        make store-service--build
-        make store-service--push
+        make store-service--docker-build
+        make store-service--docker-push

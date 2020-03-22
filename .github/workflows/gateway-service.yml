@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'src/go/gateway-service/**'
+      - 'src/go/common/**'
     branches: 
       - master
 
@@ -43,5 +44,5 @@ jobs:
         echo 'Logging in to Docker Hub'
         docker login -u theleede -p $DOCKER_PASS
         echo 'Building Image and pushing it'
-        make gateway-service--build
-        make gateway-service--push
+        make gateway-service--docker-build
+        make gateway-service--docker-push

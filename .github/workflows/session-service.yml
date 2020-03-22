@@ -1,9 +1,10 @@
-name: Session Service CI
+name: User Service CI
 
 on: 
   push:
     paths:
       - 'src/go/session-service/**'
+      - 'src/go/common/**'
     branches: 
       - master
 
@@ -43,5 +44,5 @@ jobs:
         echo 'Logging in to Docker Hub'
         docker login -u theleede -p $DOCKER_PASS
         echo 'Building Image and pushing it'
-        make session-service--build
-        make session-service--push
+        make session-service--docker-build
+        make session-service--docker-push

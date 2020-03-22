@@ -1,6 +1,10 @@
 package service
 
 import (
+	"fmt"
+	"net"
+	"time"
+
 	redis "github.com/go-redis/redis/v7"
 	"github.com/ryssapp/backend/src/go/common/pb"
 	"github.com/ryssapp/backend/src/go/session-service/config"
@@ -8,14 +12,13 @@ import (
 	"github.com/ryssapp/backend/src/go/session-service/repository"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
-	"net"
-	"time"
 )
 
 const ExpirationLength time.Duration = time.Hour * 24
 
 func Start() {
 	c := config.Load()
+	fmt.Println(c.RedisPassword)
 	db := initRedis(c.RedisAddress, c.RedisPassword, c.RedisDatabase)
 	defer db.Close()
 
