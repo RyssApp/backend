@@ -82,10 +82,10 @@ session-service--docker-push:
 # ============= Generic commands ============= #
 
 docker-build:
-	bazel run //:$(PROJECT) -- --norun
+	bazel run //:$(PROJECT)
 
 docker-push:
-	bazel run //:$(PROJECT)-push -- --norun
+	bazel run //:$(PROJECT)-push
 
 build:
 	bazel build //src/go/$(PROJECT):$(PROJECT)
