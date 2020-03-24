@@ -17,7 +17,7 @@ DEPENDENCY_LIST = [
         "io.sentry:sentry-logback:1.7.30",
         "org.jetbrains.kotlinx:kotlinx-cli:0.2.1",
     
-        "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.70"
+        # "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.70"
 ]
 
 MAVEN_REPOSITORIES = [

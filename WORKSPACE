@@ -2,6 +2,9 @@ workspace(name = "ryss")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
+RULES_JVM_EXTERNAL_TAG = "3.0"
+RULES_JVM_EXTERNAL_SHA = "62133c125bf4109dfd9d2af64830208356ce4ef8b165a6ef15bbff7460b35c3a"
+
 http_archive(
     name = "io_bazel_rules_go",
     sha256 = "142dd33e38b563605f0d20e89d9ef9eda0fc3cb539a14be1bdb1350de2eda659",
@@ -13,9 +16,9 @@ http_archive(
 
 http_archive(
     name = "build_stack_rules_proto",
-    urls = ["https://github.com/stackb/rules_proto/archive/1d6b84118399828511faeecc145d399c1e7bdee2.tar.gz"],
     sha256 = "7e421578cba10736b6411d991514771996c7d21b4575d7f33e1d606a6a2cfe4d",
     strip_prefix = "rules_proto-1d6b84118399828511faeecc145d399c1e7bdee2",
+    urls = ["https://github.com/stackb/rules_proto/archive/1d6b84118399828511faeecc145d399c1e7bdee2.tar.gz"],
 )
 
 http_archive(
@@ -35,16 +38,33 @@ http_archive(
 )
 
 http_archive(
+    name = "rules_jvm_external",
+    sha256 = RULES_JVM_EXTERNAL_SHA,
+    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
+    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
+)
+
+load("@rules_jvm_external//:defs.bzl", "maven_install")
+
+
+http_archive(
     name = "io_bazel_rules_kotlin",
-    urls = ["https://github.com/bazelbuild/rules_kotlin/archive/legacy-1.3.0.zip"],
-    type = "zip",
-    strip_prefix = "rules_kotlin-legacy-1.3.0",
     sha256 = "4fd769fb0db5d3c6240df8a9500515775101964eebdf85a3f9f0511130885fde",
+    strip_prefix = "rules_kotlin-legacy-1.3.0",
+    type = "zip",
+    urls = ["https://github.com/bazelbuild/rules_kotlin/archive/legacy-1.3.0.zip"],
 )
 
 load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kotlin_repositories", "kt_register_toolchains")
+
 kotlin_repositories()
+
 kt_register_toolchains()
+
+load("//:tools/jvm_dependencies.bzl", "install_maven_dependencies")
+
+install_maven_dependencies()
+
 load("@build_stack_rules_proto//go:deps.bzl", "go_proto_library")
 
 go_proto_library()
