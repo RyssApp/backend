@@ -47,6 +47,8 @@ github.com/gofiber/fiber v1.8.33 h1:oq4f0fhiKNrz1CAxsql3tpyIQ+1S+RekRoiczyYiUdI=
 github.com/gofiber/fiber v1.8.33/go.mod h1:JD9ZZgxqitISS6yDcKP26BKR6Ul+z6UrZX7WlalC1sE=
 github.com/gofiber/fiber v1.8.41 h1:FQbWf8H+rmkpeAqMZGdy3mMV2S6cN+F7hpEcew8Qv9g=
 github.com/gofiber/fiber v1.8.41/go.mod h1:yQhhFUJprqnZVaEbd5h4ZqU+wb9vzP5imw7UbjGlDuQ=
+github.com/gofiber/fiber v1.9.1 h1:4vByoR2gxcqkV3MnKela3Zp+rACSkYhRDJ1wpAtRy0E=
+github.com/gofiber/fiber v1.9.1/go.mod h1:ThdZ5QUqMHnyVIvzLnB+L7GRzXrofcfGbVzNV5tefz0=
 github.com/gofiber/template v1.0.0 h1:Vf4Fby9zUWVQyY2y69KKyRHsEYlIE+Pxb25M+jiaEL0=
 github.com/gofiber/template v1.0.0/go.mod h1:+bij+R0NI6urTg2jtQvPj5wb2uWMxW9eYGsAN3QhnP0=
 github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b/go.mod h1:SBH7ygxi8pfUlaOkMMuAQtPIUF8ecWP5IEl/CR7VP2Q=
@@ -123,6 +125,8 @@ github.com/valyala/bytebufferpool v1.0.0 h1:GqA5TC/0021Y/b9FG4Oi9Mr3q7XYx6Kllzaw
 github.com/valyala/bytebufferpool v1.0.0/go.mod h1:6bBcMArwyJ5K/AmCkWv1jt77kVWyCJ6HpOuEn7z0Csc=
 github.com/valyala/fasthttp v1.9.0 h1:hNpmUdy/+ZXYpGy0OBfm7K0UQTzb73W0T0U4iJIVrMw=
 github.com/valyala/fasthttp v1.9.0/go.mod h1:FstJa9V+Pj9vQ7OJie2qMHdwemEDaDiSdBnvPM1Su9w=
+github.com/valyala/fasthttp v1.11.0 h1:CpWaRjWmZMkgcngl8P7ygGoHmfXSZDcKx3Vdv8Bdkuw=
+github.com/valyala/fasthttp v1.11.0/go.mod h1:FstJa9V+Pj9vQ7OJie2qMHdwemEDaDiSdBnvPM1Su9w=
 github.com/valyala/fasttemplate v1.1.0/go.mod h1:UQGH1tvbgY+Nz5t2n7tXsz52dQxojPUpymEIMZ47gx8=
 github.com/valyala/tcplisten v0.0.0-20161114210144-ceec8f93295a/go.mod h1:v3UYOV9WzVtRmSR+PDvWpU/qWl4Wa5LApYYX4ZtKbio=
 github.com/vmihailenco/bufpool v0.1.5 h1:mEO/biwhAgiY97yPMmAdH4PvaIu63C6uGBdfSdoMo/I=
