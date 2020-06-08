@@ -5,7 +5,7 @@ go 1.14
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-pg/pg/v9 v9.1.4
-	github.com/go-redis/redis/v7 v7.2.0
+	github.com/go-redis/redis/v7 v7.4.0
 	github.com/gofiber/cors v0.0.1
 	github.com/gofiber/fiber v1.8.41
 	github.com/golang/protobuf v1.3.5
