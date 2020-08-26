@@ -17,5 +17,5 @@ require (
 	github.com/valyala/fasthttp v1.9.0
 	go.uber.org/zap v1.14.1
 	golang.org/x/crypto v0.0.0-20200320181102-891825fb96df
-	google.golang.org/grpc v1.28.0
+	google.golang.org/grpc v1.31.1
 )
