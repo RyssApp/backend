@@ -9,7 +9,7 @@ require (
 	github.com/gofiber/cors v0.0.1
 	github.com/gofiber/fiber v1.8.41
 	github.com/golang/protobuf v1.3.5
-	github.com/google/uuid v1.1.1
+	github.com/google/uuid v1.1.4
 	github.com/graphql-go/graphql v0.7.9
 	github.com/graphql-go/handler v0.2.3
 	github.com/joho/godotenv v1.3.0
