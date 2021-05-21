@@ -14,8 +14,8 @@ require (
 	github.com/graphql-go/handler v0.2.3
 	github.com/joho/godotenv v1.3.0
 	github.com/kelseyhightower/envconfig v1.4.0
-	github.com/valyala/fasthttp v1.9.0
+	github.com/valyala/fasthttp v1.25.0
 	go.uber.org/zap v1.14.1
-	golang.org/x/crypto v0.0.0-20200320181102-891825fb96df
+	golang.org/x/crypto v0.0.0-20210513164829-c07d793c2f9a
 	google.golang.org/grpc v1.28.0
 )
